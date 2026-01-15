@@ -5,11 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Industria Fitness — Gym Wrapped 2025</title>
   <style>
-    /*
-      Industria Fitness — Gym Wrapped 2025
-      Single-file static HTML (CSS + JS embedded) — no frameworks, no external libs.
-      Mobile-first 9:16 story-like experience.
-    */
 
     :root {
       --bg: #070707;
@@ -928,7 +923,7 @@
             ` : ``}
           </div>
           <div class="footHint">
-            <span style="font-size:30px;">${footer || "Desliza para seguir"}</span>
+            <span style="font-size:15px;">${footer || "Desliza para seguir"}</span>
             <div class="chev" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M7 10l5 5 5-5" stroke="rgba(255,255,255,.65)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
