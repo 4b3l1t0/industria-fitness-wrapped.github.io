@@ -1,4 +1,3 @@
-<!doctype html>
 <html lang="es">
 
 <head>
@@ -6,11 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Industria Fitness — Gym Wrapped 2025</title>
   <style>
-    /*
-      Industria Fitness — Gym Wrapped 2025
-      Single-file static HTML (CSS + JS embedded) — no frameworks, no external libs.
-      Mobile-first 9:16 story-like experience.
-    */
 
     :root {
       --bg: #070707;
