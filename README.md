@@ -573,8 +573,8 @@
     <section class="screen active" id="screenLogin" aria-label="Login">
       <div class="content">
 
-        <!-- <div class="topbar" style="margin-top:auto"> -->
-        <div class="topbar">
+        <div class="topbar" style="margin-top:20px">
+          <!-- <div class="topbar"> -->
           <div class="brand">
             <div class="logo" aria-hidden="true">
               <!-- <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
