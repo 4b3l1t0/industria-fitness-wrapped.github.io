@@ -1,0 +1,1467 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Industria Fitness — Gym Wrapped 2025</title>
+  <style>
+    /*
+      Industria Fitness — Gym Wrapped 2025
+      Single-file static HTML (CSS + JS embedded) — no frameworks, no external libs.
+      Mobile-first 9:16 story-like experience.
+    */
+
+    :root {
+      --bg: #070707;
+      --panel: #0f0f10;
+      --text: #ffffff;
+      --muted: rgba(255, 255, 255, .62);
+      --muted2: rgba(255, 255, 255, .42);
+      --yellow: #ffd400;
+      --yellow2: #ffea62;
+      --stroke: rgba(255, 255, 255, .12);
+      --shadow: 0 20px 60px rgba(0, 0, 0, .6);
+      --radius: 22px;
+      --radius2: 28px;
+      --ease: cubic-bezier(.2, .8, .2, 1);
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background:
+        radial-gradient(1200px 800px at 15% 10%, rgba(255, 212, 0, .18), transparent 55%),
+        radial-gradient(900px 900px at 90% 15%, rgba(255, 255, 255, .08), transparent 55%),
+        radial-gradient(900px 900px at 10% 90%, rgba(255, 212, 0, .10), transparent 55%),
+        linear-gradient(180deg, #050505, #0a0a0b 60%, #050505);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      overflow: hidden;
+    }
+
+    /* App shell in 9:16 */
+    .phone {
+      width: min(420px, 100%);
+      aspect-ratio: 9/16;
+      background:
+        radial-gradient(800px 500px at 20% 10%, rgba(255, 212, 0, .18), transparent 60%),
+        radial-gradient(700px 600px at 80% 0%, rgba(255, 255, 255, .10), transparent 55%),
+        linear-gradient(180deg, #0a0a0a, #050505);
+      border: 1px solid rgba(255, 255, 255, .10);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .grain::before {
+      content: "";
+      position: absolute;
+      inset: -40px;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, .06), transparent 35%),
+        radial-gradient(circle at 90% 30%, rgba(255, 212, 0, .08), transparent 40%),
+        radial-gradient(circle at 30% 90%, rgba(255, 255, 255, .05), transparent 40%);
+      filter: blur(1px);
+      opacity: .75;
+      pointer-events: none;
+    }
+
+    .screen {
+      position: absolute;
+      inset: 0;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity .45s var(--ease), transform .45s var(--ease);
+      pointer-events: none;
+    }
+
+    .screen.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 14px;
+      border: 1px solid rgba(255, 255, 255, .10);
+      border-radius: 18px;
+      background: rgba(10, 10, 10, .55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .logo {
+      width: 50px;
+      height: 50px;
+      flex: 0 0 auto;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background:
+        radial-gradient(18px 18px at 30% 20%, rgba(255, 255, 255, .16), transparent 55%),
+        linear-gradient(180deg, rgba(255, 212, 0, .95), rgba(255, 212, 0, .40));
+      display: grid;
+      place-items: center;
+      box-shadow: 0 10px 24px rgba(255, 212, 0, .10);
+      margin-right: 20px;
+    }
+
+    /* .logo svg {
+      width: 22px;
+      height: 22px
+    } */
+
+    .logo img {
+      width: 50px;
+      height: 50px;
+      flex: 0 0 auto;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background:
+        radial-gradient(18px 18px at 30% 20%, rgba(255, 255, 255, .16), transparent 55%),
+        linear-gradient(180deg, rgba(255, 212, 0, .95), rgba(255, 212, 0, .40));
+      display: grid;
+      place-items: center;
+      box-shadow: 0 10px 24px rgba(255, 212, 0, .10);
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 14px;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand p {
+      margin: 2px 0 0;
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .pill {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .04);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .pill b {
+      color: #fff;
+      font-weight: 800
+    }
+
+    .content {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .title {
+      margin: 8px 0 0;
+      font-size: 28px;
+      line-height: 1.05;
+      letter-spacing: -0.7px;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .card {
+      border: 1px solid rgba(255, 255, 255, .10);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(600px 220px at 20% 0%, rgba(255, 212, 0, .14), transparent 60%),
+        linear-gradient(180deg, rgba(255, 255, 255, .04), rgba(255, 255, 255, .02));
+      box-shadow: 0 10px 34px rgba(0, 0, 0, .35);
+      padding: 16px;
+    }
+
+    .inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    label {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    input {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(0, 0, 0, .35);
+      color: #fff;
+      padding: 13px 14px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color .2s var(--ease), transform .2s var(--ease);
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    input:focus {
+      border-color: rgba(255, 212, 0, .7);
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .row>div {
+      flex: 1;
+    }
+
+    .btn {
+      width: 100%;
+      border: none;
+      border-radius: 16px;
+      padding: 14px 14px;
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: .3px;
+      cursor: pointer;
+      background:
+        radial-gradient(120px 60px at 30% 20%, rgba(255, 255, 255, .18), transparent 60%),
+        linear-gradient(180deg, rgba(255, 212, 0, 1), rgba(255, 212, 0, .78));
+      color: #101010;
+      box-shadow: 0 14px 34px rgba(255, 212, 0, .14);
+      transition: transform .18s var(--ease), filter .18s var(--ease);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+    }
+
+    .btn:active {
+      transform: translateY(0px) scale(.99);
+    }
+
+    .tiny {
+      font-size: 12px;
+      color: var(--muted2);
+      margin-top: 10px;
+    }
+
+    .error {
+      margin-top: 10px;
+      font-size: 13px;
+      color: rgba(255, 120, 120, .95);
+      display: none;
+    }
+
+    /* Loading */
+    .loadingWrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      gap: 14px;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .loader {
+      width: 54px;
+      height: 54px;
+      border-radius: 999px;
+      border: 3px solid rgba(255, 255, 255, .12);
+      border-top-color: rgba(255, 212, 0, .95);
+      animation: spin 1s linear infinite;
+      box-shadow: 0 12px 30px rgba(255, 212, 0, .10);
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    /* Wrapped */
+    .slides {
+      flex: 1;
+      min-height: 0;
+      border-radius: var(--radius);
+      overflow: auto;
+      scroll-snap-type: y mandatory;
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid rgba(255, 255, 255, .10);
+      background: rgba(0, 0, 0, .22);
+      position: relative;
+    }
+
+    .slide {
+      min-height: calc(100%);
+      padding: 18px 16px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      scroll-snap-align: start;
+      position: relative;
+    }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(700px 260px at 20% 0%, rgba(255, 212, 0, .18), transparent 60%),
+        radial-gradient(500px 260px at 90% 10%, rgba(255, 255, 255, .09), transparent 60%);
+      opacity: .9;
+      pointer-events: none;
+    }
+
+    .slideInner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .04);
+      width: fit-content;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: .2px;
+    }
+
+    .big {
+      font-size: 44px;
+      line-height: .95;
+      letter-spacing: -1.6px;
+      margin: 5px;
+      font-weight: 950;
+    }
+
+    .big span {
+      color: var(--yellow)
+    }
+
+    .statLine {
+      margin: 0;
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.45;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    .miniGrid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .miniCard {
+      padding: 12px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, .10);
+      background: rgba(255, 255, 255, .03);
+    }
+
+    .miniCard .label {
+      font-size: 12px;
+      color: var(--muted2)
+    }
+
+    .miniCard .value {
+      margin-top: 6px;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: -.2px
+    }
+
+    .footHint {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: rgba(255, 255, 255, .45);
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    .chev {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      display: grid;
+      place-items: center;
+      background: rgba(0, 0, 0, .25);
+    }
+
+    .fadeIn {
+      animation: fadeIn .55s var(--ease) both
+    }
+
+    .slideUp {
+      animation: slideUp .55s var(--ease) both
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    /* Final image screen */
+    .imgPanel {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .previewWrap {
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, .10);
+      background: rgba(0, 0, 0, .22);
+      overflow: hidden;
+      display: none;
+    }
+
+    .previewWrap img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 9/16;
+      object-fit: cover;
+    }
+
+    .smallNote {
+      font-size: 12px;
+      color: var(--muted2);
+      margin: 0
+    }
+
+    /* Tests */
+    .testBox {
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, .10);
+      background: rgba(255, 255, 255, .03);
+    }
+
+    .testBox h3 {
+      margin: 0 0 8px;
+      font-size: 12px;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .7);
+    }
+
+    .testLine {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--muted)
+    }
+
+    .badge {
+      font-size: 11px;
+      font-weight: 900;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(0, 0, 0, .25);
+      color: rgba(255, 255, 255, .72);
+    }
+
+    .badge.ok {
+      border-color: rgba(120, 255, 160, .25);
+      color: rgba(160, 255, 200, .92)
+    }
+
+    .badge.fail {
+      border-color: rgba(255, 120, 120, .25);
+      color: rgba(255, 160, 160, .92)
+    }
+
+    /* Small devices */
+    @media (max-width: 360px) {
+      .title {
+        font-size: 26px
+      }
+
+      .big {
+        font-size: 40px
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="phone grain" id="app">
+
+    <!-- Screen 1: Login -->
+    <section class="screen active" id="screenLogin" aria-label="Login">
+      <div class="content">
+
+        <div class="topbar" style="margin-top:5px">
+          <!-- <div class="topbar"> -->
+          <div class="brand">
+            <div class="logo" aria-hidden="true">
+              <!-- <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M8 6V18" stroke="#101010" stroke-width="2.3" stroke-linecap="round" />
+                <path d="M12 6H18" stroke="#101010" stroke-width="2.3" stroke-linecap="round" />
+                <path d="M12 12H17" stroke="#101010" stroke-width="2.3" stroke-linecap="round" />
+              </svg> -->
+              <img src="./IMG-20250126-WA0079.jpg">
+            </div>
+            <div style="min-width:0">
+              <h1 style="color: #ffea62;">Industria Fitness</h1>
+              <p>Gym Wrapped</p>
+            </div>
+          </div>
+          <!-- <div class="pill"><span>9:16</span><b>Story</b></div> -->
+        </div>
+
+        <h2 class="title slideUp" style="margin-bottom: 15px;">Tu Año 2025 en el Gym</h2>
+        <!--         <p class="subtitle fadeIn">Industria Fitness — Gym Wrapped 2025</p>-->
+
+
+        <div class="card slideUp" style="animation-delay:.06s">
+          <div class="inputs">
+            <div class="row">
+              <div>
+                <label for="clientId">Introduce tu número</label>
+                <input id="clientId" inputmode="numeric" placeholder="Ej: 33" autocomplete="off" />
+              </div>
+              <!-- <div>
+                <label for="clientName">Nombre</label>
+                <input id="clientName" placeholder="Ej: Alejandro" autocomplete="off" />
+              </div> -->
+            </div>
+            <button class="btn" id="btnAnalyze">Analizar</button>
+            <!-- <p class="tiny">PD: Los datos son a partir de marzo de 2025.</p> -->
+            <p class="error" id="loginError" style="font-weight: bold;">No encontré ese ID. Revisa el
+              número
+              y prueba otra vez.
+            </p>
+
+            <!-- <div class="testBox" id="testBox">
+              <h3>Tests rápidos</h3>
+              <div class="testLine"><span>Buscar por ID</span><span class="badge" id="tFind">PEND</span></div>
+              <div class="testLine"><span>Canvas 1080×1920</span><span class="badge" id="tCanvas">PEND</span></div>
+              <p class="smallNote" style="margin-top:8px">Se ejecutan al cargar la página. No usan librerías.</p>
+            </div> -->
+          </div>
+        </div>
+        <p class="tiny">PD: Los datos son a partir de marzo de 2025.</p>
+
+        <!-- <div class="topbar" style="margin-top:auto">
+          <div class="brand">
+            <div class="logo" aria-hidden="true">
+              <img src="./IMG-20250126-WA0079.jpg">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M8 6V18" stroke="#101010" stroke-width="2.3" stroke-linecap="round"/>
+                <path d="M12 6H18" stroke="#101010" stroke-width="2.3" stroke-linecap="round"/>
+                <path d="M12 12H17" stroke="#101010" stroke-width="2.3" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div style="min-width:0">
+              <h1>Industria Fitness</h1>
+              <p>Gym Wrapped 2025</p>
+            </div>
+          </div>
+          <div class="pill"><span>9:16</span><b>Story</b></div>
+        </div> -->
+      </div>
+    </section>
+
+    <!-- Screen 2: Loading -->
+    <section class="screen" id="screenLoading" aria-label="Loading">
+      <div class="topbar" style="margin-top:5px">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">
+            <img src="./IMG-20250126-WA0079.jpg">
+
+            <!-- <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M8 6V18" stroke="#101010" stroke-width="2.3" stroke-linecap="round" />
+              <path d="M12 6H18" stroke="#101010" stroke-width="2.3" stroke-linecap="round" />
+              <path d="M12 12H17" stroke="#101010" stroke-width="2.3" stroke-linecap="round" />
+            </svg> -->
+          </div>
+          <div style="min-width:0">
+            <h1>Industria Fitness</h1>
+            <p>Preparando tu wrapped…</p>
+          </div>
+        </div>
+        <div class="pill"><span>ID</span><b id="pillId">—</b></div>
+      </div>
+
+      <div class="loadingWrap">
+        <div class="loader" aria-hidden="true"></div>
+        <h2 class="title" style="font-size:22px;margin:0">Analizando tus datos…</h2>
+        <p class="subtitle" style="max-width: 290px">Dame 3 segundos y te digo la verdad</p>
+      </div>
+    </section>
+
+    <!-- Screen 3: Wrapped (slides) -->
+    <section class="screen" id="screenWrapped" aria-label="Wrapped">
+      <div class="topbar" style="margin-top:5px">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">
+            <img src="./IMG-20250126-WA0079.jpg">
+
+            <!-- <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M8 6V18" stroke="#101010" stroke-width="2.3" stroke-linecap="round" />
+              <path d="M12 6H18" stroke="#101010" stroke-width="2.3" stroke-linecap="round" />
+              <path d="M12 12H17" stroke="#101010" stroke-width="2.3" stroke-linecap="round" />
+            </svg> -->
+          </div>
+          <div style="min-width:0">
+            <h1>Industria Fitness</h1>
+            <p id="headerSub">Gym Wrapped 2025</p>
+          </div>
+        </div>
+        <div class="pill"><span>ID</span><b id="headerId">—</b></div>
+      </div>
+
+      <div class="content">
+        <div class="slides" id="slides" aria-label="Slides verticales" title="Desliza hacia arriba">
+          <!-- Slides injected by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen 4: Final image generation -->
+    <section class="screen" id="screenImage" aria-label="Generar imagen">
+      <div class="topbar" style="margin-top:5px">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">
+            <img src="./IMG-20250126-WA0079.jpg">
+
+            <!-- <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M8 6V18" stroke="#101010" stroke-width="2.3" stroke-linecap="round" />
+              <path d="M12 6H18" stroke="#101010" stroke-width="2.3" stroke-linecap="round" />
+              <path d="M12 12H17" stroke="#101010" stroke-width="2.3" stroke-linecap="round" />
+            </svg> -->
+          </div>
+          <div style="min-width:0">
+            <h1>Industria Fitness</h1>
+            <p>Imagen 9:16 lista para Stories</p>
+          </div>
+        </div>
+        <div class="pill"><span>Nivel</span><b id="headerLevel">—</b></div>
+      </div>
+
+      <div class="content">
+        <div class="card imgPanel">
+          <h2 class="title" style="font-size:22px; margin:0">Tu Gym Wrapped en una sola imagen</h2>
+          <p class="subtitle">Dale al botón y te genero un PNG 1080×1920 con tu resumen.</p>
+          <button class="btn" id="btnGenerate">Generar imagen 9:16</button>
+          <p class="smallNote">Tip: si el navegador bloquea la descarga automática, te dejo el preview para guardarla
+            manualmente.</p>
+
+          <div class="previewWrap" id="previewWrap">
+            <img id="imgPreview" alt="Preview del PNG generado" />
+          </div>
+        </div>
+
+        <!-- <div class="card" style="margin-top:auto; padding:14px">
+          <p class="smallNote" style="margin:0">Hecho 100% en tu navegador (Canvas API). Sin backend, sin librerías, sin
+            cuentos.</p>
+        </div> -->
+
+        <!-- Offscreen canvas (still in DOM for tests) -->
+        <canvas id="shareCanvas" width="1080" height="1920"
+          style="position:absolute; left:-99999px; top:-99999px"></canvas>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    /***********************
+     * Local JSON dataset
+     * (Replace / extend this array with your real client data)
+     ***********************/
+    const CLIENTS = [{ "idcliente": 1, "total_visitas": 108, "mayor_racha_ausencia_dias": 51, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "80%", "fueron_mas_constantes_que_tu": "18%" } }, { "idcliente": 2, "total_visitas": 81, "mayor_racha_ausencia_dias": 3, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "68%", "fueron_mas_constantes_que_tu": "31%" } }, { "idcliente": 3, "total_visitas": 125, "mayor_racha_ausencia_dias": 12, "mes_mejor_constancia": "Julio", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "88%", "fueron_mas_constantes_que_tu": "11%" } }, { "idcliente": 4, "total_visitas": 18, "mayor_racha_ausencia_dias": 3, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "25%", "fueron_mas_constantes_que_tu": "73%" } }, { "idcliente": 7, "total_visitas": 117, "mayor_racha_ausencia_dias": 53, "mes_mejor_constancia": "Julio", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "85%", "fueron_mas_constantes_que_tu": "13%" } }, { "idcliente": 8, "total_visitas": 7, "mayor_racha_ausencia_dias": 5, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "9%", "fueron_mas_constantes_que_tu": "89%" } }, { "idcliente": 9, "total_visitas": 125, "mayor_racha_ausencia_dias": 12, "mes_mejor_constancia": "Junio", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "88%", "fueron_mas_constantes_que_tu": "11%" } }, { "idcliente": 10, "total_visitas": 92, "mayor_racha_ausencia_dias": 16, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "73%", "fueron_mas_constantes_que_tu": "26%" } }, { "idcliente": 11, "total_visitas": 7, "mayor_racha_ausencia_dias": 8, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "9%", "fueron_mas_constantes_que_tu": "89%" } }, { "idcliente": 12, "total_visitas": 10, "mayor_racha_ausencia_dias": 2, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "15%", "fueron_mas_constantes_que_tu": "82%" } }, { "idcliente": 13, "total_visitas": 50, "mayor_racha_ausencia_dias": 9, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "47%", "fueron_mas_constantes_que_tu": "50%" } }, { "idcliente": 14, "total_visitas": 154, "mayor_racha_ausencia_dias": 27, "mes_mejor_constancia": "Julio", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "95%", "fueron_mas_constantes_que_tu": "4%" } }, { "idcliente": 15, "total_visitas": 50, "mayor_racha_ausencia_dias": 9, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "47%", "fueron_mas_constantes_que_tu": "50%" } }, { "idcliente": 16, "total_visitas": 135, "mayor_racha_ausencia_dias": 12, "mes_mejor_constancia": "Julio", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "91%", "fueron_mas_constantes_que_tu": "8%" } }, { "idcliente": 17, "total_visitas": 8, "mayor_racha_ausencia_dias": 2, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "11%", "fueron_mas_constantes_que_tu": "87%" } }, { "idcliente": 18, "total_visitas": 65, "mayor_racha_ausencia_dias": 4, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "60%", "fueron_mas_constantes_que_tu": "38%" } }, { "idcliente": 19, "total_visitas": 8, "mayor_racha_ausencia_dias": 3, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "11%", "fueron_mas_constantes_que_tu": "87%" } }, { "idcliente": 20, "total_visitas": 39, "mayor_racha_ausencia_dias": 7, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "41%", "fueron_mas_constantes_que_tu": "58%" } }, { "idcliente": 21, "total_visitas": 125, "mayor_racha_ausencia_dias": 18, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "88%", "fueron_mas_constantes_que_tu": "11%" } }, { "idcliente": 22, "total_visitas": 14, "mayor_racha_ausencia_dias": 32, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "22%", "fueron_mas_constantes_que_tu": "77%" } }, { "idcliente": 23, "total_visitas": 20, "mayor_racha_ausencia_dias": 2, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "28%", "fueron_mas_constantes_que_tu": "70%" } }, { "idcliente": 24, "total_visitas": 20, "mayor_racha_ausencia_dias": 8, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "28%", "fueron_mas_constantes_que_tu": "70%" } }, { "idcliente": 25, "total_visitas": 16, "mayor_racha_ausencia_dias": 4, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "23%", "fueron_mas_constantes_que_tu": "75%" } }, { "idcliente": 26, "total_visitas": 10, "mayor_racha_ausencia_dias": 6, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "15%", "fueron_mas_constantes_que_tu": "82%" } }, { "idcliente": 27, "total_visitas": 99, "mayor_racha_ausencia_dias": 59, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "76%", "fueron_mas_constantes_que_tu": "22%" } }, { "idcliente": 28, "total_visitas": 113, "mayor_racha_ausencia_dias": 20, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "82%", "fueron_mas_constantes_que_tu": "16%" } }, { "idcliente": 29, "total_visitas": 82, "mayor_racha_ausencia_dias": 26, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "69%", "fueron_mas_constantes_que_tu": "30%" } }, { "idcliente": 30, "total_visitas": 19, "mayor_racha_ausencia_dias": 18, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "26%", "fueron_mas_constantes_que_tu": "71%" } }, { "idcliente": 31, "total_visitas": 29, "mayor_racha_ausencia_dias": 16, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "34%", "fueron_mas_constantes_que_tu": "65%" } }, { "idcliente": 32, "total_visitas": 2, "mayor_racha_ausencia_dias": 1, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "1%", "fueron_mas_constantes_que_tu": "98%" } }, { "idcliente": 33, "total_visitas": 208, "mayor_racha_ausencia_dias": 18, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "99%", "fueron_mas_constantes_que_tu": "0%" } }, { "idcliente": 34, "total_visitas": 17, "mayor_racha_ausencia_dias": 10, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "24%", "fueron_mas_constantes_que_tu": "74%" } }, { "idcliente": 35, "total_visitas": 19, "mayor_racha_ausencia_dias": 3, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "26%", "fueron_mas_constantes_que_tu": "71%" } }, { "idcliente": 36, "total_visitas": 3, "mayor_racha_ausencia_dias": 2, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "2%", "fueron_mas_constantes_que_tu": "95%" } }, { "idcliente": 37, "total_visitas": 145, "mayor_racha_ausencia_dias": 14, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "93%", "fueron_mas_constantes_que_tu": "5%" } }, { "idcliente": 38, "total_visitas": 58, "mayor_racha_ausencia_dias": 27, "mes_mejor_constancia": "Agosto", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "55%", "fueron_mas_constantes_que_tu": "43%" } }, { "idcliente": 39, "total_visitas": 9, "mayor_racha_ausencia_dias": 2, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "13%", "fueron_mas_constantes_que_tu": "85%" } }, { "idcliente": 40, "total_visitas": 107, "mayor_racha_ausencia_dias": 32, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "79%", "fueron_mas_constantes_que_tu": "19%" } }, { "idcliente": 41, "total_visitas": 88, "mayor_racha_ausencia_dias": 13, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "71%", "fueron_mas_constantes_que_tu": "28%" } }, { "idcliente": 42, "total_visitas": 24, "mayor_racha_ausencia_dias": 3, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "32%", "fueron_mas_constantes_que_tu": "67%" } }, { "idcliente": 43, "total_visitas": 107, "mayor_racha_ausencia_dias": 15, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "79%", "fueron_mas_constantes_que_tu": "19%" } }, { "idcliente": 44, "total_visitas": 115, "mayor_racha_ausencia_dias": 25, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "83%", "fueron_mas_constantes_que_tu": "15%" } }, { "idcliente": 45, "total_visitas": 178, "mayor_racha_ausencia_dias": 9, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "98%", "fueron_mas_constantes_que_tu": "1%" } }, { "idcliente": 46, "total_visitas": 5, "mayor_racha_ausencia_dias": 4, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "6%", "fueron_mas_constantes_que_tu": "91%" } }, { "idcliente": 47, "total_visitas": 165, "mayor_racha_ausencia_dias": 6, "mes_mejor_constancia": "Agosto", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "96%", "fueron_mas_constantes_que_tu": "3%" } }, { "idcliente": 48, "total_visitas": 9, "mayor_racha_ausencia_dias": 5, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "13%", "fueron_mas_constantes_que_tu": "85%" } }, { "idcliente": 49, "total_visitas": 57, "mayor_racha_ausencia_dias": 53, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "54%", "fueron_mas_constantes_que_tu": "44%" } }, { "idcliente": 50, "total_visitas": 88, "mayor_racha_ausencia_dias": 16, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "71%", "fueron_mas_constantes_que_tu": "28%" } }, { "idcliente": 51, "total_visitas": 50, "mayor_racha_ausencia_dias": 38, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "47%", "fueron_mas_constantes_que_tu": "50%" } }, { "idcliente": 52, "total_visitas": 82, "mayor_racha_ausencia_dias": 62, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "69%", "fueron_mas_constantes_que_tu": "30%" } }, { "idcliente": 53, "total_visitas": 4, "mayor_racha_ausencia_dias": 4, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "4%", "fueron_mas_constantes_que_tu": "94%" } }, { "idcliente": 54, "total_visitas": 71, "mayor_racha_ausencia_dias": 34, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "64%", "fueron_mas_constantes_que_tu": "34%" } }, { "idcliente": 55, "total_visitas": 10, "mayor_racha_ausencia_dias": 7, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "15%", "fueron_mas_constantes_que_tu": "82%" } }, { "idcliente": 56, "total_visitas": 99, "mayor_racha_ausencia_dias": 53, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "76%", "fueron_mas_constantes_que_tu": "22%" } }, { "idcliente": 57, "total_visitas": 107, "mayor_racha_ausencia_dias": 39, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "79%", "fueron_mas_constantes_que_tu": "19%" } }, { "idcliente": 58, "total_visitas": 12, "mayor_racha_ausencia_dias": 2, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "19%", "fueron_mas_constantes_que_tu": "79%" } }, { "idcliente": 59, "total_visitas": 50, "mayor_racha_ausencia_dias": 10, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "47%", "fueron_mas_constantes_que_tu": "50%" } }, { "idcliente": 60, "total_visitas": 1, "mayor_racha_ausencia_dias": 0, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "0%", "fueron_mas_constantes_que_tu": "98%" } }, { "idcliente": 61, "total_visitas": 44, "mayor_racha_ausencia_dias": 61, "mes_mejor_constancia": "Julio", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "43%", "fueron_mas_constantes_que_tu": "55%" } }, { "idcliente": 62, "total_visitas": 3, "mayor_racha_ausencia_dias": 3, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "2%", "fueron_mas_constantes_que_tu": "95%" } }, { "idcliente": 63, "total_visitas": 93, "mayor_racha_ausencia_dias": 33, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "74%", "fueron_mas_constantes_que_tu": "25%" } }, { "idcliente": 64, "total_visitas": 74, "mayor_racha_ausencia_dias": 57, "mes_mejor_constancia": "Julio", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "66%", "fueron_mas_constantes_que_tu": "33%" } }, { "idcliente": 65, "total_visitas": 7, "mayor_racha_ausencia_dias": 5, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "9%", "fueron_mas_constantes_que_tu": "89%" } }, { "idcliente": 66, "total_visitas": 29, "mayor_racha_ausencia_dias": 4, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "34%", "fueron_mas_constantes_que_tu": "65%" } }, { "idcliente": 67, "total_visitas": 88, "mayor_racha_ausencia_dias": 43, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "71%", "fueron_mas_constantes_que_tu": "28%" } }, { "idcliente": 68, "total_visitas": 169, "mayor_racha_ausencia_dias": 17, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "97%", "fueron_mas_constantes_que_tu": "2%" } }, { "idcliente": 69, "total_visitas": 51, "mayor_racha_ausencia_dias": 66, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "49%", "fueron_mas_constantes_que_tu": "49%" } }, { "idcliente": 70, "total_visitas": 10, "mayor_racha_ausencia_dias": 1, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "15%", "fueron_mas_constantes_que_tu": "82%" } }, { "idcliente": 71, "total_visitas": 74, "mayor_racha_ausencia_dias": 51, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "66%", "fueron_mas_constantes_que_tu": "33%" } }, { "idcliente": 72, "total_visitas": 1, "mayor_racha_ausencia_dias": 0, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "0%", "fueron_mas_constantes_que_tu": "98%" } }, { "idcliente": 73, "total_visitas": 22, "mayor_racha_ausencia_dias": 56, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "31%", "fueron_mas_constantes_que_tu": "68%" } }, { "idcliente": 74, "total_visitas": 112, "mayor_racha_ausencia_dias": 6, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "82%", "fueron_mas_constantes_que_tu": "17%" } }, { "idcliente": 75, "total_visitas": 6, "mayor_racha_ausencia_dias": 5, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "8%", "fueron_mas_constantes_que_tu": "91%" } }, { "idcliente": 76, "total_visitas": 40, "mayor_racha_ausencia_dias": 2, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "41%", "fueron_mas_constantes_que_tu": "57%" } }, { "idcliente": 77, "total_visitas": 49, "mayor_racha_ausencia_dias": 61, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "47%", "fueron_mas_constantes_que_tu": "52%" } }, { "idcliente": 78, "total_visitas": 53, "mayor_racha_ausencia_dias": 5, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "51%", "fueron_mas_constantes_que_tu": "48%" } }, { "idcliente": 80, "total_visitas": 1, "mayor_racha_ausencia_dias": 0, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "0%", "fueron_mas_constantes_que_tu": "98%" } }, { "idcliente": 81, "total_visitas": 46, "mayor_racha_ausencia_dias": 26, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "45%", "fueron_mas_constantes_que_tu": "54%" } }, { "idcliente": 83, "total_visitas": 13, "mayor_racha_ausencia_dias": 11, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "20%", "fueron_mas_constantes_que_tu": "78%" } }, { "idcliente": 84, "total_visitas": 55, "mayor_racha_ausencia_dias": 25, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "52%", "fueron_mas_constantes_que_tu": "47%" } }, { "idcliente": 85, "total_visitas": 5, "mayor_racha_ausencia_dias": 0, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "6%", "fueron_mas_constantes_que_tu": "91%" } }, { "idcliente": 86, "total_visitas": 58, "mayor_racha_ausencia_dias": 6, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "55%", "fueron_mas_constantes_que_tu": "43%" } }, { "idcliente": 87, "total_visitas": 85, "mayor_racha_ausencia_dias": 17, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "69%", "fueron_mas_constantes_que_tu": "29%" } }, { "idcliente": 88, "total_visitas": 116, "mayor_racha_ausencia_dias": 16, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "84%", "fueron_mas_constantes_que_tu": "14%" } }, { "idcliente": 89, "total_visitas": 106, "mayor_racha_ausencia_dias": 16, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "79%", "fueron_mas_constantes_que_tu": "20%" } }, { "idcliente": 90, "total_visitas": 36, "mayor_racha_ausencia_dias": 52, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "38%", "fueron_mas_constantes_que_tu": "60%" } }, { "idcliente": 91, "total_visitas": 10, "mayor_racha_ausencia_dias": 6, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "15%", "fueron_mas_constantes_que_tu": "82%" } }, { "idcliente": 92, "total_visitas": 7, "mayor_racha_ausencia_dias": 6, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "9%", "fueron_mas_constantes_que_tu": "89%" } }, { "idcliente": 93, "total_visitas": 62, "mayor_racha_ausencia_dias": 47, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "59%", "fueron_mas_constantes_que_tu": "40%" } }, { "idcliente": 94, "total_visitas": 37, "mayor_racha_ausencia_dias": 5, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "39%", "fueron_mas_constantes_que_tu": "59%" } }, { "idcliente": 95, "total_visitas": 55, "mayor_racha_ausencia_dias": 47, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "52%", "fueron_mas_constantes_que_tu": "47%" } }, { "idcliente": 96, "total_visitas": 5, "mayor_racha_ausencia_dias": 7, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "6%", "fueron_mas_constantes_que_tu": "91%" } }, { "idcliente": 97, "total_visitas": 1, "mayor_racha_ausencia_dias": 0, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "0%", "fueron_mas_constantes_que_tu": "98%" } }, { "idcliente": 99, "total_visitas": 13, "mayor_racha_ausencia_dias": 4, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "20%", "fueron_mas_constantes_que_tu": "78%" } }, { "idcliente": 100, "total_visitas": 11, "mayor_racha_ausencia_dias": 2, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "18%", "fueron_mas_constantes_que_tu": "80%" } }, { "idcliente": 101, "total_visitas": 9, "mayor_racha_ausencia_dias": 6, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "13%", "fueron_mas_constantes_que_tu": "85%" } }, { "idcliente": 102, "total_visitas": 55, "mayor_racha_ausencia_dias": 9, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "52%", "fueron_mas_constantes_que_tu": "47%" } }, { "idcliente": 103, "total_visitas": 121, "mayor_racha_ausencia_dias": 25, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "87%", "fueron_mas_constantes_que_tu": "12%" } }, { "idcliente": 104, "total_visitas": 24, "mayor_racha_ausencia_dias": 58, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "32%", "fueron_mas_constantes_que_tu": "67%" } }, { "idcliente": 105, "total_visitas": 192, "mayor_racha_ausencia_dias": 5, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "99%", "fueron_mas_constantes_que_tu": "0%" } }, { "idcliente": 106, "total_visitas": 61, "mayor_racha_ausencia_dias": 19, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "58%", "fueron_mas_constantes_que_tu": "40%" } }, { "idcliente": 107, "total_visitas": 146, "mayor_racha_ausencia_dias": 6, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "94%", "fueron_mas_constantes_que_tu": "5%" } }, { "idcliente": 108, "total_visitas": 15, "mayor_racha_ausencia_dias": 3, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "22%", "fueron_mas_constantes_que_tu": "76%" } }, { "idcliente": 109, "total_visitas": 26, "mayor_racha_ausencia_dias": 13, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "33%", "fueron_mas_constantes_que_tu": "66%" } }, { "idcliente": 110, "total_visitas": 18, "mayor_racha_ausencia_dias": 10, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "25%", "fueron_mas_constantes_que_tu": "73%" } }, { "idcliente": 111, "total_visitas": 6, "mayor_racha_ausencia_dias": 2, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "8%", "fueron_mas_constantes_que_tu": "91%" } }, { "idcliente": 113, "total_visitas": 44, "mayor_racha_ausencia_dias": 3, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "43%", "fueron_mas_constantes_que_tu": "55%" } }, { "idcliente": 114, "total_visitas": 131, "mayor_racha_ausencia_dias": 23, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "90%", "fueron_mas_constantes_que_tu": "9%" } }, { "idcliente": 115, "total_visitas": 5, "mayor_racha_ausencia_dias": 0, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "6%", "fueron_mas_constantes_que_tu": "91%" } }, { "idcliente": 116, "total_visitas": 101, "mayor_racha_ausencia_dias": 54, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "77%", "fueron_mas_constantes_que_tu": "22%" } }, { "idcliente": 117, "total_visitas": 19, "mayor_racha_ausencia_dias": 68, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "26%", "fueron_mas_constantes_que_tu": "71%" } }, { "idcliente": 118, "total_visitas": 115, "mayor_racha_ausencia_dias": 33, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "83%", "fueron_mas_constantes_que_tu": "15%" } }, { "idcliente": 119, "total_visitas": 40, "mayor_racha_ausencia_dias": 37, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "41%", "fueron_mas_constantes_que_tu": "57%" } }, { "idcliente": 120, "total_visitas": 152, "mayor_racha_ausencia_dias": 11, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "95%", "fueron_mas_constantes_que_tu": "4%" } }, { "idcliente": 121, "total_visitas": 170, "mayor_racha_ausencia_dias": 13, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "98%", "fueron_mas_constantes_que_tu": "1%" } }, { "idcliente": 122, "total_visitas": 110, "mayor_racha_ausencia_dias": 15, "mes_mejor_constancia": "Julio", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "81%", "fueron_mas_constantes_que_tu": "18%" } }, { "idcliente": 123, "total_visitas": 105, "mayor_racha_ausencia_dias": 19, "mes_mejor_constancia": "Julio", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "78%", "fueron_mas_constantes_que_tu": "20%" } }, { "idcliente": 124, "total_visitas": 77, "mayor_racha_ausencia_dias": 11, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "67%", "fueron_mas_constantes_que_tu": "32%" } }, { "idcliente": 125, "total_visitas": 17, "mayor_racha_ausencia_dias": 3, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "24%", "fueron_mas_constantes_que_tu": "74%" } }, { "idcliente": 126, "total_visitas": 36, "mayor_racha_ausencia_dias": 32, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "38%", "fueron_mas_constantes_que_tu": "60%" } }, { "idcliente": 127, "total_visitas": 114, "mayor_racha_ausencia_dias": 46, "mes_mejor_constancia": "Julio", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "83%", "fueron_mas_constantes_que_tu": "16%" } }, { "idcliente": 128, "total_visitas": 3, "mayor_racha_ausencia_dias": 0, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "2%", "fueron_mas_constantes_que_tu": "95%" } }, { "idcliente": 129, "total_visitas": 3, "mayor_racha_ausencia_dias": 0, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "2%", "fueron_mas_constantes_que_tu": "95%" } }, { "idcliente": 132, "total_visitas": 21, "mayor_racha_ausencia_dias": 3, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "29%", "fueron_mas_constantes_que_tu": "69%" } }, { "idcliente": 133, "total_visitas": 77, "mayor_racha_ausencia_dias": 18, "mes_mejor_constancia": "Junio", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "67%", "fueron_mas_constantes_que_tu": "32%" } }, { "idcliente": 134, "total_visitas": 12, "mayor_racha_ausencia_dias": 4, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "19%", "fueron_mas_constantes_que_tu": "79%" } }, { "idcliente": 135, "total_visitas": 1, "mayor_racha_ausencia_dias": 0, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "0%", "fueron_mas_constantes_que_tu": "98%" } }, { "idcliente": 136, "total_visitas": 27, "mayor_racha_ausencia_dias": 4, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "33%", "fueron_mas_constantes_que_tu": "66%" } }, { "idcliente": 137, "total_visitas": 146, "mayor_racha_ausencia_dias": 9, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "94%", "fueron_mas_constantes_que_tu": "5%" } }, { "idcliente": 138, "total_visitas": 23, "mayor_racha_ausencia_dias": 11, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "31%", "fueron_mas_constantes_que_tu": "68%" } }, { "idcliente": 139, "total_visitas": 7, "mayor_racha_ausencia_dias": 6, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "9%", "fueron_mas_constantes_que_tu": "89%" } }, { "idcliente": 140, "total_visitas": 19, "mayor_racha_ausencia_dias": 6, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "26%", "fueron_mas_constantes_que_tu": "71%" } }, { "idcliente": 141, "total_visitas": 10, "mayor_racha_ausencia_dias": 14, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "15%", "fueron_mas_constantes_que_tu": "82%" } }, { "idcliente": 143, "total_visitas": 33, "mayor_racha_ausencia_dias": 16, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "37%", "fueron_mas_constantes_que_tu": "62%" } }, { "idcliente": 144, "total_visitas": 58, "mayor_racha_ausencia_dias": 7, "mes_mejor_constancia": "Julio", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "55%", "fueron_mas_constantes_que_tu": "43%" } }, { "idcliente": 145, "total_visitas": 80, "mayor_racha_ausencia_dias": 17, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "68%", "fueron_mas_constantes_que_tu": "31%" } }, { "idcliente": 146, "total_visitas": 7, "mayor_racha_ausencia_dias": 2, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "9%", "fueron_mas_constantes_que_tu": "89%" } }, { "idcliente": 147, "total_visitas": 49, "mayor_racha_ausencia_dias": 23, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "47%", "fueron_mas_constantes_que_tu": "52%" } }, { "idcliente": 148, "total_visitas": 210, "mayor_racha_ausencia_dias": 6, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "100%", "fueron_mas_constantes_que_tu": "0%" } }, { "idcliente": 149, "total_visitas": 9, "mayor_racha_ausencia_dias": 4, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "13%", "fueron_mas_constantes_que_tu": "85%" } }, { "idcliente": 151, "total_visitas": 59, "mayor_racha_ausencia_dias": 50, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "56%", "fueron_mas_constantes_que_tu": "42%" } }, { "idcliente": 152, "total_visitas": 67, "mayor_racha_ausencia_dias": 12, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "62%", "fueron_mas_constantes_que_tu": "36%" } }, { "idcliente": 154, "total_visitas": 10, "mayor_racha_ausencia_dias": 25, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "15%", "fueron_mas_constantes_que_tu": "82%" } }, { "idcliente": 155, "total_visitas": 36, "mayor_racha_ausencia_dias": 69, "mes_mejor_constancia": "Agosto", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "38%", "fueron_mas_constantes_que_tu": "60%" } }, { "idcliente": 156, "total_visitas": 135, "mayor_racha_ausencia_dias": 22, "mes_mejor_constancia": "Julio", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "91%", "fueron_mas_constantes_que_tu": "8%" } }, { "idcliente": 157, "total_visitas": 128, "mayor_racha_ausencia_dias": 16, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "90%", "fueron_mas_constantes_que_tu": "9%" } }, { "idcliente": 158, "total_visitas": 9, "mayor_racha_ausencia_dias": 7, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "13%", "fueron_mas_constantes_que_tu": "85%" } }, { "idcliente": 160, "total_visitas": 30, "mayor_racha_ausencia_dias": 4, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "35%", "fueron_mas_constantes_que_tu": "64%" } }, { "idcliente": 161, "total_visitas": 89, "mayor_racha_ausencia_dias": 55, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "72%", "fueron_mas_constantes_que_tu": "27%" } }, { "idcliente": 162, "total_visitas": 20, "mayor_racha_ausencia_dias": 51, "mes_mejor_constancia": "Agosto", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "28%", "fueron_mas_constantes_que_tu": "70%" } }, { "idcliente": 163, "total_visitas": 4, "mayor_racha_ausencia_dias": 0, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "4%", "fueron_mas_constantes_que_tu": "94%" } }, { "idcliente": 164, "total_visitas": 20, "mayor_racha_ausencia_dias": 79, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "28%", "fueron_mas_constantes_que_tu": "70%" } }, { "idcliente": 165, "total_visitas": 126, "mayor_racha_ausencia_dias": 25, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "89%", "fueron_mas_constantes_que_tu": "10%" } }, { "idcliente": 167, "total_visitas": 2, "mayor_racha_ausencia_dias": 2, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "1%", "fueron_mas_constantes_que_tu": "98%" } }, { "idcliente": 168, "total_visitas": 5, "mayor_racha_ausencia_dias": 23, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "6%", "fueron_mas_constantes_que_tu": "91%" } }, { "idcliente": 169, "total_visitas": 10, "mayor_racha_ausencia_dias": 4, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "15%", "fueron_mas_constantes_que_tu": "82%" } }, { "idcliente": 170, "total_visitas": 38, "mayor_racha_ausencia_dias": 3, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "40%", "fueron_mas_constantes_que_tu": "58%" } }, { "idcliente": 171, "total_visitas": 50, "mayor_racha_ausencia_dias": 68, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "47%", "fueron_mas_constantes_que_tu": "50%" } }, { "idcliente": 172, "total_visitas": 37, "mayor_racha_ausencia_dias": 3, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "39%", "fueron_mas_constantes_que_tu": "59%" } }, { "idcliente": 173, "total_visitas": 19, "mayor_racha_ausencia_dias": 5, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "26%", "fueron_mas_constantes_que_tu": "71%" } }, { "idcliente": 174, "total_visitas": 71, "mayor_racha_ausencia_dias": 9, "mes_mejor_constancia": "Agosto", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "64%", "fueron_mas_constantes_que_tu": "34%" } }, { "idcliente": 175, "total_visitas": 44, "mayor_racha_ausencia_dias": 31, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "43%", "fueron_mas_constantes_que_tu": "55%" } }, { "idcliente": 176, "total_visitas": 73, "mayor_racha_ausencia_dias": 13, "mes_mejor_constancia": "Julio", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "65%", "fueron_mas_constantes_que_tu": "34%" } }, { "idcliente": 177, "total_visitas": 8, "mayor_racha_ausencia_dias": 3, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "11%", "fueron_mas_constantes_que_tu": "87%" } }, { "idcliente": 178, "total_visitas": 12, "mayor_racha_ausencia_dias": 2, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "19%", "fueron_mas_constantes_que_tu": "79%" } }, { "idcliente": 179, "total_visitas": 206, "mayor_racha_ausencia_dias": 9, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "99%", "fueron_mas_constantes_que_tu": "0%" } }, { "idcliente": 180, "total_visitas": 135, "mayor_racha_ausencia_dias": 10, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "91%", "fueron_mas_constantes_que_tu": "8%" } }, { "idcliente": 183, "total_visitas": 13, "mayor_racha_ausencia_dias": 2, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "20%", "fueron_mas_constantes_que_tu": "78%" } }, { "idcliente": 184, "total_visitas": 12, "mayor_racha_ausencia_dias": 5, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "19%", "fueron_mas_constantes_que_tu": "79%" } }, { "idcliente": 185, "total_visitas": 31, "mayor_racha_ausencia_dias": 4, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "36%", "fueron_mas_constantes_que_tu": "63%" } }, { "idcliente": 186, "total_visitas": 51, "mayor_racha_ausencia_dias": 23, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "49%", "fueron_mas_constantes_que_tu": "49%" } }, { "idcliente": 187, "total_visitas": 68, "mayor_racha_ausencia_dias": 12, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "63%", "fueron_mas_constantes_que_tu": "36%" } }, { "idcliente": 188, "total_visitas": 8, "mayor_racha_ausencia_dias": 13, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "11%", "fueron_mas_constantes_que_tu": "87%" } }, { "idcliente": 189, "total_visitas": 56, "mayor_racha_ausencia_dias": 43, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "53%", "fueron_mas_constantes_que_tu": "46%" } }, { "idcliente": 190, "total_visitas": 126, "mayor_racha_ausencia_dias": 15, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "89%", "fueron_mas_constantes_que_tu": "10%" } }, { "idcliente": 191, "total_visitas": 8, "mayor_racha_ausencia_dias": 4, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "11%", "fueron_mas_constantes_que_tu": "87%" } }, { "idcliente": 192, "total_visitas": 14, "mayor_racha_ausencia_dias": 2, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "22%", "fueron_mas_constantes_que_tu": "77%" } }, { "idcliente": 193, "total_visitas": 38, "mayor_racha_ausencia_dias": 8, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "40%", "fueron_mas_constantes_que_tu": "58%" } }, { "idcliente": 194, "total_visitas": 11, "mayor_racha_ausencia_dias": 9, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "18%", "fueron_mas_constantes_que_tu": "80%" } }, { "idcliente": 195, "total_visitas": 19, "mayor_racha_ausencia_dias": 4, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "26%", "fueron_mas_constantes_que_tu": "71%" } }, { "idcliente": 196, "total_visitas": 42, "mayor_racha_ausencia_dias": 47, "mes_mejor_constancia": "Julio", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "42%", "fueron_mas_constantes_que_tu": "57%" } }, { "idcliente": 197, "total_visitas": 69, "mayor_racha_ausencia_dias": 16, "mes_mejor_constancia": "Junio", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "63%", "fueron_mas_constantes_que_tu": "35%" } }, { "idcliente": 198, "total_visitas": 16, "mayor_racha_ausencia_dias": 4, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "23%", "fueron_mas_constantes_que_tu": "75%" } }, { "idcliente": 199, "total_visitas": 11, "mayor_racha_ausencia_dias": 9, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "18%", "fueron_mas_constantes_que_tu": "80%" } }, { "idcliente": 200, "total_visitas": 151, "mayor_racha_ausencia_dias": 16, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "95%", "fueron_mas_constantes_que_tu": "4%" } }, { "idcliente": 201, "total_visitas": 137, "mayor_racha_ausencia_dias": 25, "mes_mejor_constancia": "Julio", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "92%", "fueron_mas_constantes_que_tu": "7%" } }, { "idcliente": 202, "total_visitas": 175, "mayor_racha_ausencia_dias": 10, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "98%", "fueron_mas_constantes_que_tu": "1%" } }, { "idcliente": 203, "total_visitas": 96, "mayor_racha_ausencia_dias": 58, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "75%", "fueron_mas_constantes_que_tu": "24%" } }, { "idcliente": 204, "total_visitas": 112, "mayor_racha_ausencia_dias": 58, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "82%", "fueron_mas_constantes_que_tu": "17%" } }, { "idcliente": 206, "total_visitas": 30, "mayor_racha_ausencia_dias": 39, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "35%", "fueron_mas_constantes_que_tu": "64%" } }, { "idcliente": 207, "total_visitas": 22, "mayor_racha_ausencia_dias": 6, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "31%", "fueron_mas_constantes_que_tu": "68%" } }, { "idcliente": 208, "total_visitas": 57, "mayor_racha_ausencia_dias": 9, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "54%", "fueron_mas_constantes_que_tu": "44%" } }, { "idcliente": 209, "total_visitas": 16, "mayor_racha_ausencia_dias": 4, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "23%", "fueron_mas_constantes_que_tu": "75%" } }, { "idcliente": 210, "total_visitas": 24, "mayor_racha_ausencia_dias": 6, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "32%", "fueron_mas_constantes_que_tu": "67%" } }, { "idcliente": 212, "total_visitas": 11, "mayor_racha_ausencia_dias": 60, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "18%", "fueron_mas_constantes_que_tu": "80%" } }, { "idcliente": 213, "total_visitas": 3, "mayor_racha_ausencia_dias": 0, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "2%", "fueron_mas_constantes_que_tu": "95%" } }, { "idcliente": 214, "total_visitas": 15, "mayor_racha_ausencia_dias": 5, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "22%", "fueron_mas_constantes_que_tu": "76%" } }, { "idcliente": 215, "total_visitas": 123, "mayor_racha_ausencia_dias": 21, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "87%", "fueron_mas_constantes_que_tu": "12%" } }, { "idcliente": 216, "total_visitas": 141, "mayor_racha_ausencia_dias": 18, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "93%", "fueron_mas_constantes_que_tu": "7%" } }, { "idcliente": 217, "total_visitas": 66, "mayor_racha_ausencia_dias": 43, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "61%", "fueron_mas_constantes_que_tu": "38%" } }, { "idcliente": 218, "total_visitas": 144, "mayor_racha_ausencia_dias": 13, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "93%", "fueron_mas_constantes_que_tu": "6%" } }, { "idcliente": 219, "total_visitas": 72, "mayor_racha_ausencia_dias": 25, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "65%", "fueron_mas_constantes_que_tu": "34%" } }, { "idcliente": 220, "total_visitas": 18, "mayor_racha_ausencia_dias": 17, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "25%", "fueron_mas_constantes_que_tu": "73%" } }, { "idcliente": 221, "total_visitas": 103, "mayor_racha_ausencia_dias": 23, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "78%", "fueron_mas_constantes_que_tu": "22%" } }, { "idcliente": 222, "total_visitas": 56, "mayor_racha_ausencia_dias": 61, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "53%", "fueron_mas_constantes_que_tu": "46%" } }, { "idcliente": 223, "total_visitas": 5, "mayor_racha_ausencia_dias": 5, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "6%", "fueron_mas_constantes_que_tu": "91%" } }, { "idcliente": 224, "total_visitas": 65, "mayor_racha_ausencia_dias": 41, "mes_mejor_constancia": "Junio", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "60%", "fueron_mas_constantes_que_tu": "38%" } }, { "idcliente": 225, "total_visitas": 56, "mayor_racha_ausencia_dias": 9, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "53%", "fueron_mas_constantes_que_tu": "46%" } }, { "idcliente": 226, "total_visitas": 22, "mayor_racha_ausencia_dias": 14, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "31%", "fueron_mas_constantes_que_tu": "68%" } }, { "idcliente": 227, "total_visitas": 60, "mayor_racha_ausencia_dias": 5, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "57%", "fueron_mas_constantes_que_tu": "42%" } }, { "idcliente": 228, "total_visitas": 115, "mayor_racha_ausencia_dias": 60, "mes_mejor_constancia": "Junio", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "83%", "fueron_mas_constantes_que_tu": "15%" } }, { "idcliente": 229, "total_visitas": 3, "mayor_racha_ausencia_dias": 5, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "2%", "fueron_mas_constantes_que_tu": "95%" } }, { "idcliente": 230, "total_visitas": 105, "mayor_racha_ausencia_dias": 44, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "78%", "fueron_mas_constantes_que_tu": "20%" } }, { "idcliente": 231, "total_visitas": 12, "mayor_racha_ausencia_dias": 2, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "19%", "fueron_mas_constantes_que_tu": "79%" } }, { "idcliente": 232, "total_visitas": 94, "mayor_racha_ausencia_dias": 18, "mes_mejor_constancia": "Julio", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "74%", "fueron_mas_constantes_que_tu": "24%" } }, { "idcliente": 233, "total_visitas": 94, "mayor_racha_ausencia_dias": 41, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "74%", "fueron_mas_constantes_que_tu": "24%" } }, { "idcliente": 234, "total_visitas": 3, "mayor_racha_ausencia_dias": 4, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "2%", "fueron_mas_constantes_que_tu": "95%" } }, { "idcliente": 235, "total_visitas": 88, "mayor_racha_ausencia_dias": 18, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "71%", "fueron_mas_constantes_que_tu": "28%" } }, { "idcliente": 236, "total_visitas": 168, "mayor_racha_ausencia_dias": 8, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "97%", "fueron_mas_constantes_que_tu": "2%" } }, { "idcliente": 237, "total_visitas": 124, "mayor_racha_ausencia_dias": 12, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "88%", "fueron_mas_constantes_que_tu": "11%" } }, { "idcliente": 238, "total_visitas": 57, "mayor_racha_ausencia_dias": 5, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "54%", "fueron_mas_constantes_que_tu": "44%" } }, { "idcliente": 239, "total_visitas": 43, "mayor_racha_ausencia_dias": 21, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "42%", "fueron_mas_constantes_que_tu": "57%" } }, { "idcliente": 240, "total_visitas": 90, "mayor_racha_ausencia_dias": 13, "mes_mejor_constancia": "Julio", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "72%", "fueron_mas_constantes_que_tu": "27%" } }, { "idcliente": 241, "total_visitas": 16, "mayor_racha_ausencia_dias": 5, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "23%", "fueron_mas_constantes_que_tu": "75%" } }, { "idcliente": 242, "total_visitas": 99, "mayor_racha_ausencia_dias": 31, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "76%", "fueron_mas_constantes_que_tu": "22%" } }, { "idcliente": 243, "total_visitas": 77, "mayor_racha_ausencia_dias": 45, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "67%", "fueron_mas_constantes_que_tu": "32%" } }, { "idcliente": 244, "total_visitas": 4, "mayor_racha_ausencia_dias": 5, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "4%", "fueron_mas_constantes_que_tu": "94%" } }, { "idcliente": 245, "total_visitas": 69, "mayor_racha_ausencia_dias": 69, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "63%", "fueron_mas_constantes_que_tu": "35%" } }, { "idcliente": 246, "total_visitas": 9, "mayor_racha_ausencia_dias": 2, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "13%", "fueron_mas_constantes_que_tu": "85%" } }, { "idcliente": 247, "total_visitas": 137, "mayor_racha_ausencia_dias": 45, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "92%", "fueron_mas_constantes_que_tu": "7%" } }, { "idcliente": 248, "total_visitas": 27, "mayor_racha_ausencia_dias": 20, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "33%", "fueron_mas_constantes_que_tu": "66%" } }, { "idcliente": 249, "total_visitas": 30, "mayor_racha_ausencia_dias": 75, "mes_mejor_constancia": "Junio", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "35%", "fueron_mas_constantes_que_tu": "64%" } }, { "idcliente": 250, "total_visitas": 107, "mayor_racha_ausencia_dias": 24, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "79%", "fueron_mas_constantes_que_tu": "19%" } }, { "idcliente": 251, "total_visitas": 94, "mayor_racha_ausencia_dias": 26, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "74%", "fueron_mas_constantes_que_tu": "24%" } }, { "idcliente": 252, "total_visitas": 166, "mayor_racha_ausencia_dias": 13, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "97%", "fueron_mas_constantes_que_tu": "2%" } }, { "idcliente": 253, "total_visitas": 32, "mayor_racha_ausencia_dias": 9, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "37%", "fueron_mas_constantes_que_tu": "62%" } }, { "idcliente": 254, "total_visitas": 35, "mayor_racha_ausencia_dias": 18, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "38%", "fueron_mas_constantes_que_tu": "61%" } }, { "idcliente": 255, "total_visitas": 21, "mayor_racha_ausencia_dias": 19, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "29%", "fueron_mas_constantes_que_tu": "69%" } }, { "idcliente": 256, "total_visitas": 66, "mayor_racha_ausencia_dias": 21, "mes_mejor_constancia": "Julio", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "61%", "fueron_mas_constantes_que_tu": "38%" } }, { "idcliente": 257, "total_visitas": 48, "mayor_racha_ausencia_dias": 6, "mes_mejor_constancia": "Junio", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "46%", "fueron_mas_constantes_que_tu": "53%" } }, { "idcliente": 258, "total_visitas": 119, "mayor_racha_ausencia_dias": 17, "mes_mejor_constancia": "Julio", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "86%", "fueron_mas_constantes_que_tu": "13%" } }, { "idcliente": 259, "total_visitas": 159, "mayor_racha_ausencia_dias": 10, "mes_mejor_constancia": "Junio", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "96%", "fueron_mas_constantes_que_tu": "3%" } }, { "idcliente": 260, "total_visitas": 77, "mayor_racha_ausencia_dias": 17, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "67%", "fueron_mas_constantes_que_tu": "32%" } }, { "idcliente": 261, "total_visitas": 122, "mayor_racha_ausencia_dias": 13, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "87%", "fueron_mas_constantes_que_tu": "12%" } }, { "idcliente": 262, "total_visitas": 4, "mayor_racha_ausencia_dias": 4, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "4%", "fueron_mas_constantes_que_tu": "94%" } }, { "idcliente": 263, "total_visitas": 6, "mayor_racha_ausencia_dias": 2, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "8%", "fueron_mas_constantes_que_tu": "91%" } }, { "idcliente": 264, "total_visitas": 10, "mayor_racha_ausencia_dias": 3, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "15%", "fueron_mas_constantes_que_tu": "82%" } }, { "idcliente": 265, "total_visitas": 10, "mayor_racha_ausencia_dias": 3, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "15%", "fueron_mas_constantes_que_tu": "82%" } }, { "idcliente": 266, "total_visitas": 108, "mayor_racha_ausencia_dias": 19, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "80%", "fueron_mas_constantes_que_tu": "18%" } }, { "idcliente": 267, "total_visitas": 116, "mayor_racha_ausencia_dias": 22, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "84%", "fueron_mas_constantes_que_tu": "14%" } }, { "idcliente": 268, "total_visitas": 4, "mayor_racha_ausencia_dias": 2, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "4%", "fueron_mas_constantes_que_tu": "94%" } }, { "idcliente": 269, "total_visitas": 111, "mayor_racha_ausencia_dias": 12, "mes_mejor_constancia": "Junio", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "81%", "fueron_mas_constantes_que_tu": "18%" } }, { "idcliente": 270, "total_visitas": 44, "mayor_racha_ausencia_dias": 45, "mes_mejor_constancia": "Junio", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "43%", "fueron_mas_constantes_que_tu": "55%" } }, { "idcliente": 271, "total_visitas": 44, "mayor_racha_ausencia_dias": 13, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "43%", "fueron_mas_constantes_que_tu": "55%" } }, { "idcliente": 272, "total_visitas": 2, "mayor_racha_ausencia_dias": 1, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "1%", "fueron_mas_constantes_que_tu": "98%" } }, { "idcliente": 273, "total_visitas": 3, "mayor_racha_ausencia_dias": 0, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "2%", "fueron_mas_constantes_que_tu": "95%" } }, { "idcliente": 274, "total_visitas": 13, "mayor_racha_ausencia_dias": 5, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "20%", "fueron_mas_constantes_que_tu": "78%" } }, { "idcliente": 275, "total_visitas": 113, "mayor_racha_ausencia_dias": 17, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "82%", "fueron_mas_constantes_que_tu": "16%" } }, { "idcliente": 276, "total_visitas": 96, "mayor_racha_ausencia_dias": 32, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "75%", "fueron_mas_constantes_que_tu": "24%" } }, { "idcliente": 277, "total_visitas": 11, "mayor_racha_ausencia_dias": 6, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "18%", "fueron_mas_constantes_que_tu": "80%" } }, { "idcliente": 278, "total_visitas": 8, "mayor_racha_ausencia_dias": 2, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "11%", "fueron_mas_constantes_que_tu": "87%" } }, { "idcliente": 279, "total_visitas": 9, "mayor_racha_ausencia_dias": 2, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "13%", "fueron_mas_constantes_que_tu": "85%" } }, { "idcliente": 280, "total_visitas": 40, "mayor_racha_ausencia_dias": 20, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "41%", "fueron_mas_constantes_que_tu": "57%" } }, { "idcliente": 282, "total_visitas": 115, "mayor_racha_ausencia_dias": 5, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "83%", "fueron_mas_constantes_que_tu": "15%" } }, { "idcliente": 283, "total_visitas": 61, "mayor_racha_ausencia_dias": 86, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "58%", "fueron_mas_constantes_que_tu": "40%" } }, { "idcliente": 284, "total_visitas": 100, "mayor_racha_ausencia_dias": 39, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "77%", "fueron_mas_constantes_que_tu": "22%" } }, { "idcliente": 285, "total_visitas": 62, "mayor_racha_ausencia_dias": 3, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "59%", "fueron_mas_constantes_que_tu": "40%" } }, { "idcliente": 286, "total_visitas": 13, "mayor_racha_ausencia_dias": 6, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "20%", "fueron_mas_constantes_que_tu": "78%" } }, { "idcliente": 287, "total_visitas": 44, "mayor_racha_ausencia_dias": 19, "mes_mejor_constancia": "Junio", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "43%", "fueron_mas_constantes_que_tu": "55%" } }, { "idcliente": 288, "total_visitas": 5, "mayor_racha_ausencia_dias": 5, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "6%", "fueron_mas_constantes_que_tu": "91%" } }, { "idcliente": 290, "total_visitas": 117, "mayor_racha_ausencia_dias": 13, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "85%", "fueron_mas_constantes_que_tu": "13%" } }, { "idcliente": 291, "total_visitas": 31, "mayor_racha_ausencia_dias": 65, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "36%", "fueron_mas_constantes_que_tu": "63%" } }, { "idcliente": 292, "total_visitas": 35, "mayor_racha_ausencia_dias": 23, "mes_mejor_constancia": "Agosto", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "38%", "fueron_mas_constantes_que_tu": "61%" } }, { "idcliente": 293, "total_visitas": 8, "mayor_racha_ausencia_dias": 8, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "11%", "fueron_mas_constantes_que_tu": "87%" } }, { "idcliente": 294, "total_visitas": 44, "mayor_racha_ausencia_dias": 32, "mes_mejor_constancia": "Junio", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "43%", "fueron_mas_constantes_que_tu": "55%" } }, { "idcliente": 296, "total_visitas": 24, "mayor_racha_ausencia_dias": 34, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "32%", "fueron_mas_constantes_que_tu": "67%" } }, { "idcliente": 297, "total_visitas": 91, "mayor_racha_ausencia_dias": 20, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "73%", "fueron_mas_constantes_que_tu": "26%" } }, { "idcliente": 298, "total_visitas": 85, "mayor_racha_ausencia_dias": 17, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "69%", "fueron_mas_constantes_que_tu": "29%" } }, { "idcliente": 303, "total_visitas": 21, "mayor_racha_ausencia_dias": 24, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "29%", "fueron_mas_constantes_que_tu": "69%" } }, { "idcliente": 309, "total_visitas": 160, "mayor_racha_ausencia_dias": 11, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "96%", "fueron_mas_constantes_que_tu": "3%" } }, { "idcliente": 310, "total_visitas": 134, "mayor_racha_ausencia_dias": 18, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "91%", "fueron_mas_constantes_que_tu": "9%" } }, { "idcliente": 311, "total_visitas": 46, "mayor_racha_ausencia_dias": 17, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "45%", "fueron_mas_constantes_que_tu": "54%" } }, { "idcliente": 313, "total_visitas": 58, "mayor_racha_ausencia_dias": 47, "mes_mejor_constancia": "Julio", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "55%", "fueron_mas_constantes_que_tu": "43%" } }, { "idcliente": 314, "total_visitas": 50, "mayor_racha_ausencia_dias": 4, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "47%", "fueron_mas_constantes_que_tu": "50%" } }, { "idcliente": 316, "total_visitas": 90, "mayor_racha_ausencia_dias": 7, "mes_mejor_constancia": "Julio", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "72%", "fueron_mas_constantes_que_tu": "27%" } }, { "idcliente": 317, "total_visitas": 59, "mayor_racha_ausencia_dias": 11, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "56%", "fueron_mas_constantes_que_tu": "42%" } }, { "idcliente": 320, "total_visitas": 17, "mayor_racha_ausencia_dias": 13, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "24%", "fueron_mas_constantes_que_tu": "74%" } }, { "idcliente": 322, "total_visitas": 31, "mayor_racha_ausencia_dias": 4, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "36%", "fueron_mas_constantes_que_tu": "63%" } }, { "idcliente": 323, "total_visitas": 67, "mayor_racha_ausencia_dias": 10, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "62%", "fueron_mas_constantes_que_tu": "36%" } }, { "idcliente": 324, "total_visitas": 61, "mayor_racha_ausencia_dias": 3, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "58%", "fueron_mas_constantes_que_tu": "40%" } }, { "idcliente": 327, "total_visitas": 5, "mayor_racha_ausencia_dias": 3, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 5, "fuiste_mas_constante_que": "6%", "fueron_mas_constantes_que_tu": "91%" } }, { "idcliente": 333, "total_visitas": 169, "mayor_racha_ausencia_dias": 16, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "97%", "fueron_mas_constantes_que_tu": "2%" } }, { "idcliente": 340, "total_visitas": 28, "mayor_racha_ausencia_dias": 15, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "34%", "fueron_mas_constantes_que_tu": "65%" } }, { "idcliente": 342, "total_visitas": 70, "mayor_racha_ausencia_dias": 10, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "64%", "fueron_mas_constantes_que_tu": "35%" } }, { "idcliente": 345, "total_visitas": 67, "mayor_racha_ausencia_dias": 18, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "62%", "fueron_mas_constantes_que_tu": "36%" } }, { "idcliente": 347, "total_visitas": 21, "mayor_racha_ausencia_dias": 11, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "29%", "fueron_mas_constantes_que_tu": "69%" } }, { "idcliente": 353, "total_visitas": 48, "mayor_racha_ausencia_dias": 27, "mes_mejor_constancia": "Julio", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "46%", "fueron_mas_constantes_que_tu": "53%" } }, { "idcliente": 361, "total_visitas": 57, "mayor_racha_ausencia_dias": 13, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "54%", "fueron_mas_constantes_que_tu": "44%" } }, { "idcliente": 365, "total_visitas": 46, "mayor_racha_ausencia_dias": 11, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "45%", "fueron_mas_constantes_que_tu": "54%" } }, { "idcliente": 366, "total_visitas": 54, "mayor_racha_ausencia_dias": 6, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "51%", "fueron_mas_constantes_que_tu": "47%" } }, { "idcliente": 374, "total_visitas": 85, "mayor_racha_ausencia_dias": 45, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "69%", "fueron_mas_constantes_que_tu": "29%" } }, { "idcliente": 375, "total_visitas": 145, "mayor_racha_ausencia_dias": 8, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "93%", "fueron_mas_constantes_que_tu": "5%" } }, { "idcliente": 376, "total_visitas": 37, "mayor_racha_ausencia_dias": 38, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "39%", "fueron_mas_constantes_que_tu": "59%" } }, { "idcliente": 381, "total_visitas": 87, "mayor_racha_ausencia_dias": 11, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "70%", "fueron_mas_constantes_que_tu": "29%" } }, { "idcliente": 382, "total_visitas": 97, "mayor_racha_ausencia_dias": 41, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "76%", "fueron_mas_constantes_que_tu": "23%" } }, { "idcliente": 386, "total_visitas": 47, "mayor_racha_ausencia_dias": 41, "mes_mejor_constancia": "Julio", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "46%", "fueron_mas_constantes_que_tu": "53%" } }, { "idcliente": 389, "total_visitas": 38, "mayor_racha_ausencia_dias": 52, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "40%", "fueron_mas_constantes_que_tu": "58%" } }, { "idcliente": 390, "total_visitas": 81, "mayor_racha_ausencia_dias": 15, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "68%", "fueron_mas_constantes_que_tu": "31%" } }, { "idcliente": 391, "total_visitas": 78, "mayor_racha_ausencia_dias": 17, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "68%", "fueron_mas_constantes_que_tu": "31%" } }, { "idcliente": 392, "total_visitas": 54, "mayor_racha_ausencia_dias": 47, "mes_mejor_constancia": "Agosto", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "51%", "fueron_mas_constantes_que_tu": "47%" } }, { "idcliente": 393, "total_visitas": 67, "mayor_racha_ausencia_dias": 16, "mes_mejor_constancia": "Agosto", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "62%", "fueron_mas_constantes_que_tu": "36%" } }, { "idcliente": 395, "total_visitas": 91, "mayor_racha_ausencia_dias": 43, "mes_mejor_constancia": "Julio", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "73%", "fueron_mas_constantes_que_tu": "26%" } }, { "idcliente": 399, "total_visitas": 155, "mayor_racha_ausencia_dias": 37, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "95%", "fueron_mas_constantes_que_tu": "4%" } }, { "idcliente": 407, "total_visitas": 61, "mayor_racha_ausencia_dias": 3, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "58%", "fueron_mas_constantes_que_tu": "40%" } }, { "idcliente": 408, "total_visitas": 61, "mayor_racha_ausencia_dias": 17, "mes_mejor_constancia": "Agosto", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "58%", "fueron_mas_constantes_que_tu": "40%" } }, { "idcliente": 409, "total_visitas": 60, "mayor_racha_ausencia_dias": 17, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "57%", "fueron_mas_constantes_que_tu": "42%" } }, { "idcliente": 411, "total_visitas": 130, "mayor_racha_ausencia_dias": 20, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "90%", "fueron_mas_constantes_que_tu": "9%" } }, { "idcliente": 412, "total_visitas": 64, "mayor_racha_ausencia_dias": 61, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "60%", "fueron_mas_constantes_que_tu": "39%" } }, { "idcliente": 414, "total_visitas": 16, "mayor_racha_ausencia_dias": 67, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "23%", "fueron_mas_constantes_que_tu": "75%" } }, { "idcliente": 415, "total_visitas": 76, "mayor_racha_ausencia_dias": 19, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "66%", "fueron_mas_constantes_que_tu": "33%" } }, { "idcliente": 416, "total_visitas": 105, "mayor_racha_ausencia_dias": 44, "mes_mejor_constancia": "Junio", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "78%", "fueron_mas_constantes_que_tu": "20%" } }, { "idcliente": 417, "total_visitas": 126, "mayor_racha_ausencia_dias": 15, "mes_mejor_constancia": "Abril", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "89%", "fueron_mas_constantes_que_tu": "10%" } }, { "idcliente": 424, "total_visitas": 57, "mayor_racha_ausencia_dias": 39, "mes_mejor_constancia": "Diciembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "54%", "fueron_mas_constantes_que_tu": "44%" } }, { "idcliente": 425, "total_visitas": 30, "mayor_racha_ausencia_dias": 27, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "35%", "fueron_mas_constantes_que_tu": "64%" } }, { "idcliente": 430, "total_visitas": 104, "mayor_racha_ausencia_dias": 38, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "78%", "fueron_mas_constantes_que_tu": "21%" } }, { "idcliente": 432, "total_visitas": 50, "mayor_racha_ausencia_dias": 57, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "47%", "fueron_mas_constantes_que_tu": "50%" } }, { "idcliente": 437, "total_visitas": 119, "mayor_racha_ausencia_dias": 10, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "86%", "fueron_mas_constantes_que_tu": "13%" } }, { "idcliente": 438, "total_visitas": 120, "mayor_racha_ausencia_dias": 10, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "87%", "fueron_mas_constantes_que_tu": "13%" } }, { "idcliente": 439, "total_visitas": 70, "mayor_racha_ausencia_dias": 7, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "64%", "fueron_mas_constantes_que_tu": "35%" } }, { "idcliente": 441, "total_visitas": 65, "mayor_racha_ausencia_dias": 34, "mes_mejor_constancia": "Julio", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "60%", "fueron_mas_constantes_que_tu": "38%" } }, { "idcliente": 445, "total_visitas": 51, "mayor_racha_ausencia_dias": 10, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "49%", "fueron_mas_constantes_que_tu": "49%" } }, { "idcliente": 448, "total_visitas": 93, "mayor_racha_ausencia_dias": 67, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "74%", "fueron_mas_constantes_que_tu": "25%" } }, { "idcliente": 450, "total_visitas": 34, "mayor_racha_ausencia_dias": 8, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "38%", "fueron_mas_constantes_que_tu": "62%" } }, { "idcliente": 452, "total_visitas": 91, "mayor_racha_ausencia_dias": 38, "mes_mejor_constancia": "Junio", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "73%", "fueron_mas_constantes_que_tu": "26%" } }, { "idcliente": 454, "total_visitas": 52, "mayor_racha_ausencia_dias": 5, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "51%", "fueron_mas_constantes_que_tu": "48%" } }, { "idcliente": 455, "total_visitas": 59, "mayor_racha_ausencia_dias": 80, "mes_mejor_constancia": "Julio", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "56%", "fueron_mas_constantes_que_tu": "42%" } }, { "idcliente": 456, "total_visitas": 19, "mayor_racha_ausencia_dias": 34, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "26%", "fueron_mas_constantes_que_tu": "71%" } }, { "idcliente": 457, "total_visitas": 66, "mayor_racha_ausencia_dias": 19, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 2, "fuiste_mas_constante_que": "61%", "fueron_mas_constantes_que_tu": "38%" } }, { "idcliente": 460, "total_visitas": 138, "mayor_racha_ausencia_dias": 9, "mes_mejor_constancia": "Mayo", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "92%", "fueron_mas_constantes_que_tu": "7%" } }, { "idcliente": 462, "total_visitas": 48, "mayor_racha_ausencia_dias": 13, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "46%", "fueron_mas_constantes_que_tu": "53%" } }, { "idcliente": 463, "total_visitas": 116, "mayor_racha_ausencia_dias": 16, "mes_mejor_constancia": "Noviembre", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "84%", "fueron_mas_constantes_que_tu": "14%" } }, { "idcliente": 475, "total_visitas": 144, "mayor_racha_ausencia_dias": 16, "mes_mejor_constancia": "Julio", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "93%", "fueron_mas_constantes_que_tu": "6%" } }, { "idcliente": 494, "total_visitas": 52, "mayor_racha_ausencia_dias": 67, "mes_mejor_constancia": "Septiembre", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "51%", "fueron_mas_constantes_que_tu": "48%" } }, { "idcliente": 495, "total_visitas": 113, "mayor_racha_ausencia_dias": 6, "mes_mejor_constancia": "Octubre", "ranking": { "nivel": 1, "fuiste_mas_constante_que": "82%", "fueron_mas_constantes_que_tu": "16%" } }, { "idcliente": 497, "total_visitas": 33, "mayor_racha_ausencia_dias": 38, "mes_mejor_constancia": "Agosto", "ranking": { "nivel": 4, "fuiste_mas_constante_que": "37%", "fueron_mas_constantes_que_tu": "62%" } }, { "idcliente": 498, "total_visitas": 51, "mayor_racha_ausencia_dias": 7, "mes_mejor_constancia": "Junio", "ranking": { "nivel": 3, "fuiste_mas_constante_que": "49%", "fueron_mas_constantes_que_tu": "49%" } }];
+
+    /***********************
+     * Helpers
+     ***********************/
+    const $ = (sel) => document.querySelector(sel);
+
+    function clamp(n, min, max) { return Math.max(min, Math.min(max, n)); }
+
+    function showScreen(id) {
+      ["#screenLogin", "#screenLoading", "#screenWrapped", "#screenImage"].forEach(s => {
+        const el = $(s);
+        el.classList.toggle("active", s === id);
+      });
+    }
+
+    function safeInt(val) {
+      const n = Number(String(val).trim());
+      return Number.isFinite(n) ? Math.trunc(n) : NaN;
+    }
+
+    function findClientById(id) {
+      return CLIENTS.find(c => c.idcliente === id) || null;
+    }
+
+    const LEVELS = {
+      1: "Asere Legendario",
+      2: "Constante Plus",
+      3: "Resuelve Cuando puede",
+      4: "Inventor de Excusas",
+      5: "Tronco de  Barqueador"
+    };
+
+    function levelName(nivel) {
+      return LEVELS[nivel] || "Resuelve Cuando puede";
+    }
+
+    // ===============================
+    // FRASES POR NIVEL (RANDOM)
+    // ===============================
+    const FRASES_POR_NIVEL = {
+      5: [
+        "Empezaste suave, pero lo importante es que arrancaste 💪",
+        "Todo campeón fue novato alguna vez 😄",
+        "Poco a poco se llena el saco",
+        "El cuerpo todavía está preguntando qué está pasando 😂",
+        "Tranquilo, esto es solo el calentamiento",
+        "Lo bueno no es cuántas veces fuiste, sino que fuiste",
+        "Aquí no se juzga, se progresa",
+        "El espejo ya te está conociendo",
+        "La pesa aún no te extraña… pero espérate",
+        "Nivel inicial desbloqueado 🔓"
+      ],
+
+      4: [
+        "Ya esto no es relajo, se te ve la constancia 👀",
+        "El gym ya sabe quién tú eres",
+        "Ni principiante ni animal, pero vas bien",
+        "El cuerpo empieza a responder",
+        "Aquí ya hay compromiso",
+        "Te extrañan cuando no vas",
+        "El espejo empieza a respetarte",
+        "Las agujetas son parte de la familia",
+        "Estás en el punto peligroso: si paras, se pierde",
+        "Sigue así que la cosa se pone buena"
+      ],
+      3: [
+        "Esto ya es disciplina, no motivación 🔥",
+        "El gym es tu segunda casa",
+        "Si no vas un día, algo no cuadra",
+        "El cuerpo ya sabe la rutina",
+        "Aquí hay sacrificio real",
+        "No hace falta hablar, los resultados hablan",
+        "Constancia nivel serio",
+        "Ya te miran raro los nuevos",
+        "El espejo asiente con la cabeza",
+        "Respeto ganado a pulso"
+      ],
+      2: [
+        "Esto ya es otra liga 🦍",
+        "Las pesas te saludan primero a ti",
+        "Si faltas, preguntan por ti",
+        "Aquí no hay excusas",
+        "El sudor ya es parte del outfit",
+        "El cuerpo ya no negocia descanso",
+        "Modo animal activado",
+        "Esto no es gym, es templo",
+        "La disciplina te tiene miedo",
+        "Nivel leyenda en progreso"
+      ],
+      1: [
+        "Esto no es constancia, es devoción 🏆",
+        "El gym abre por ti",
+        "Las máquinas te respetan",
+        "Tu ausencia se siente",
+        "Aquí se entrena aunque llueva",
+        "El espejo ya no opina, aplaude",
+        "Esto ya es cultura física",
+        "Leyenda urbana del gimnasio",
+        "No entrenas, impartes clases",
+        "Nivel final desbloqueado 👑"
+      ]
+    };
+
+    // ===============================
+    // OBTENER FRASE RANDOM
+    // ===============================
+    function makeFunnyPhrase(nivel) {
+      /* const frases = FRASES_POR_NIVEL[nivel - 1] || [
+        "Entrenar siempre suma 💪"
+      ]; */
+      const frases = FRASES_POR_NIVEL[nivel];
+      return frases[Math.floor(Math.random() * frases.length)];
+    }
+
+    /* function makeFunnyPhrase({ total_visitas, mayor_racha_ausencia_dias }) {
+      // Cuban/LatAm flavor, funny but not vulgar.
+      const v = total_visitas;
+      const r = mayor_racha_ausencia_dias;
+
+      if (v >= 160 && r <= 10) {
+        return "Entrenaste tanto que el piso ya te saluda por tu nombre.";
+      }
+      if (v >= 120 && r <= 20) {
+        return "Tú no vienes al gym… tú haces guardia aquí.";
+      }
+      if (v >= 80 && r <= 25) {
+        return "El gym te conoce de vista… y de sudor.";
+      }
+      if (v >= 50 && r >= 30) {
+        return "Pagaste con fe… y entrenaste cuando te acordaste.";
+      }
+      if (v < 35 && r >= 25) {
+        return "Pagó y desapareció. Pero oye: todavía hay tiempo pa’ meterle.";
+      }
+      if (r >= 45) {
+        return "Tu mayor racha sin venir fue tan seria que el gym preguntó por ti.";
+      }
+      return "Resolvimos. Un día sí, otro también (pero con calma).";
+    } */
+
+    function ordinalRankLabel(nivel) {
+      // Small extra flavor
+      const map = { 1: "Top", 2: "Duro", 3: "En la lucha", 4: "Intermitente", 5: "Modo fantasma" };
+      return map[nivel] || "En la lucha";
+    }
+
+    /***********************
+     * State
+     ***********************/
+    const state = {
+      client: null,
+      name: "",
+      funny: "",
+      level: ""
+    };
+
+    /***********************
+     * UI rendering
+     ***********************/
+    function slideTemplate({ kicker, big, sub, gridA, gridB, footer }) {
+      // No external libs. Keep markup simple.
+      return `
+        <section class="slide">
+          <div class="slideInner">
+            <div class="kicker">${kicker}</div>
+            <h3 class="big">${big}</h3>
+            <p class="statLine">${sub}</p>
+            ${gridA || gridB ? `
+              <div class="miniGrid">
+                ${gridA ? `<div class="miniCard"><div class="label">${gridA.label}</div><div class="value">${gridA.value}</div></div>` : ``}
+                ${gridB ? `<div class="miniCard"><div class="label">${gridB.label}</div><div class="value">${gridB.value}</div></div>` : ``}
+              </div>
+            ` : ``}
+          </div>
+          <div class="footHint">
+            <span style="font-size:15px;">${footer || "Desliza para seguir"}</span>
+            <div class="chev" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 10l5 5 5-5" stroke="rgba(255,255,255,.65)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderWrapped() {
+      const c = state.client;
+      //const nombre = (state.name || "").trim();
+      const lvl = state.level;
+
+      $("#headerId").textContent = String(c.idcliente);
+      $("#headerSub").textContent = `Gym Wrapped 2025`;
+      $("#headerLevel").textContent = lvl;
+
+      const slides = [];
+
+      slides.push(slideTemplate({
+        kicker: "Tu 2025 en números",
+        big: `Hiciste <span>${c.total_visitas}</span> visitas`,
+        sub: "Cada entrada cuenta.",
+        gridA: { label: "Nivel", value: lvl },
+        gridB: { label: "Modo", value: ordinalRankLabel(c.ranking.nivel) }
+      }));
+
+      slides.push(slideTemplate({
+        kicker: "Mes estrella",
+        big: `<span>${c.mes_mejor_constancia}</span> fue tu mejor mes`,
+        sub: "Ese mes estabas encendío. Se notó.",
+        gridA: { label: "Superaste al", value: c.ranking.fuiste_mas_constante_que },
+        gridB: { label: "Más constantes que tú", value: c.ranking.fueron_mas_constantes_que_tu }
+      }));
+
+      slides.push(slideTemplate({
+        kicker: "La racha de ausencia",
+        big: `<span>${c.mayor_racha_ausencia_dias}</span> días seguidos sin aparecer`,
+        sub: "No te juzgo… pero el banco de pesas sí.",
+        gridA: { label: "Dato", value: "Mayor racha de ausencias" },
+        gridB: { label: "Mood", value: c.mayor_racha_ausencia_dias >= 30 ? "Fantasma" : "Intermitente" }
+      }));
+
+      slides.push(slideTemplate({
+        kicker: "Ranking de constancia",
+        big: `Más constante que <span>${c.ranking.fuiste_mas_constante_que}</span>`,
+        sub: "Competiste duro. Ese porcentaje no sale de la nada.",
+        gridA: { label: "Tu nivel", value: `#${c.ranking.nivel}` },
+        gridB: { label: "Etiqueta", value: ordinalRankLabel(c.ranking.nivel) }
+      }));
+
+      slides.push(slideTemplate({
+        kicker: "Tu nivel oficial",
+        big: `<span>${lvl}</span>`,
+        sub: "Esto no es un título… es un estilo de vida.",
+        gridA: { label: "Visitas", value: String(c.total_visitas) },
+        gridB: { label: "Ausencia máx.", value: `${c.mayor_racha_ausencia_dias} días` }
+      }));
+
+      slides.push(slideTemplate({
+        kicker: "Frase del año",
+        big: `<span>“</span>${state.funny}<span>”</span>`,
+        sub: "Si te dolió… es porque es verdad. 😄",
+        footer: "Desliza para seguir"
+      }));
+
+      /* <div class="miniCard"><div class="label">Nombre</div><div class="value">${escapeHtml(nombre)}</div></div> */
+      slides.push(`
+        <section class="slide">
+          <div class="slideInner">
+            <div class="kicker">Listo pa’ Stories</div>
+            <h3 class="big">Genera tu <span>imagen</span> 9:16</h3>
+            <p class="statLine">Una sola foto con tu resumen completo, estilo Industria Fitness.</p>
+            
+            <div style="height:10px"></div>
+            <button class="btn" id="goImage">Ir a generar imagen</button>
+          </div>
+          <div class="footHint">
+            <span>Toque final</span>
+            <div class="chev" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 10l5 5 5-5" stroke="rgba(255,255,255,.65)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+        </section>
+      `);
+
+      const slidesEl = $("#slides");
+      slidesEl.innerHTML = slides.join("");
+
+      // Hook the CTA button inside the last slide
+      const goBtn = $("#goImage");
+      if (goBtn) {
+        goBtn.addEventListener("click", () => showScreen("#screenImage"), { once: true });
+      }
+
+      // Reset scroll to top
+      slidesEl.scrollTo({ top: 0, behavior: "instant" });
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    /***********************
+     * Canvas Image Generation (1080×1920)
+     ***********************/
+    function drawRoundedRect(ctx, x, y, w, h, r) {
+      const radius = Math.min(r, w / 2, h / 2);
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.arcTo(x + w, y, x + w, y + h, radius);
+      ctx.arcTo(x + w, y + h, x, y + h, radius);
+      ctx.arcTo(x, y + h, x, y, radius);
+      ctx.arcTo(x, y, x + w, y, radius);
+      ctx.closePath();
+    }
+
+    function wrapText(ctx, text, x, y, maxWidth, lineHeight, maxLines) {
+      const words = String(text).split(/\s+/).filter(Boolean);
+      let line = "";
+      let lines = [];
+
+      for (const w of words) {
+        const test = line ? line + " " + w : w;
+        if (ctx.measureText(test).width > maxWidth && line) {
+          lines.push(line);
+          line = w;
+        } else {
+          line = test;
+        }
+        if (maxLines && lines.length >= maxLines) break;
+      }
+      if (!maxLines || lines.length < maxLines) lines.push(line);
+
+      if (maxLines && lines.length > maxLines) lines = lines.slice(0, maxLines);
+      // Add ellipsis if overflow
+      if (maxLines && words.length > 0 && lines.length === maxLines) {
+        let last = lines[maxLines - 1] || "";
+        while (ctx.measureText(last + "…").width > maxWidth && last.length > 0) {
+          last = last.slice(0, -1);
+        }
+        lines[maxLines - 1] = last + "…";
+      }
+
+      lines.forEach((ln, i) => ctx.fillText(ln, x, y + i * lineHeight));
+      return lines.length;
+    }
+    const appLogoImg = new Image();
+    appLogoImg.src = "data:image/jpeg;base64,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DDX/AP8A/wD/AP8A/wD/AP8A/wD/AAw1/wDumjTRzL7qbKzs8sMMPPP/AP8A/wD8sNNf/wD/AP8A/wD/AP8A/wD/APwyxPPKNCNGMvupmFuhvBwwww//AP8A/wD/AMMNf/8A/wD/AP8A/wD/AP8A/wA9GuvOPDPDMMMMtrsisugoDww1/wD/AP8A/wAMNf8A/wD/AP8A/wD/AP8A7lUw4Ecc88888880s0QA08888MDX/wD/AP8A/DDX/wD/AP8A/wD/AP8A78sMEccM8888888oggwMc888888s/wD/AP8A/wDwww//AP8A/wD/AP8A/wCPGOPHPPPPPPPKKIBDPPPPPPPPNKNGf/8A/wDrDD//AP8A/wD/AK3PFDPPPPPPPPPPLGJHPPPPPPPPPCLHPPf/AP8ArDDz/wD/AP8A/wDPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPH/wD/APLDD/8A/wDtjzzzzzzzzzzjDTzzzzzzzzzzzDzzzzzzzzz/AP8A6ww//wD/AMM888888888o04c8888888880Qsc8888888883/AKww/wD/AJc88888888csEQs888tg084A0EE88888888s4It/rDD/wD7PPPPPPOMAMBBPPPPPK6fMKHJOHPPPPPPOIEIHLN6ww/+fPPPPPMPPHLHPPPPPPPju7ynPPPPPPPOOOIFDPPKAw3/AFTzzzzzhyA2/wD99C+888BMxv8AvPPGBCBSbmSPPPPPPC1/+fPPPPPLFGJBjjitHPPPJOilPPPLPTTzzjdnPPPPPPGf/wCzzzzpnDDCBwvzzxTzzzx1KN7zzzzyTzzz67LDDLzzyz/9zzCxOLLLLXy/zzxgzTzzzxzzzzzzMBzzz7jLKI87zRjf/wAYwYW9888oM+806Okc8888888848eA888+r888+qIYM9jYMsc29888ouhMwUXc88888880E0KW+888qq88Ea0A889DoMHhf9888o8zAseUsNNNNNN76HsIc3888ur8kg2PxE08D88+/wD/AHzzDjxnzzxb/wD/AP8A3n+D/wB//wD1vPPPmmBFHv8A/wB1sD8s08898s4Dce884V8888+2O+8+888+888s/Mc8N888do/888888888c8888888888sc888888888888s88888888o/888y12wzz02/62w335x86458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";
+
+
+    function generateImage() {
+      const c = state.client;
+      if (!c) return;
+
+      //const nombre = (state.name || "Asere").trim();
+      const lvl = state.level;
+      const funny = state.funny;
+
+      const canvas = $("#shareCanvas");
+      const ctx = canvas.getContext("2d");
+
+      // Canvas size exact
+      canvas.width = 1080;
+      canvas.height = 1920;
+
+      // Background gradient
+      const bg = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      bg.addColorStop(0, "#0A0A0A");
+      bg.addColorStop(0.55, "#050505");
+      bg.addColorStop(1, "#060606");
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Glow blobs
+      function blob(x, y, r, alpha) {
+        const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+        g.addColorStop(0, `rgba(255,212,0,${alpha})`);
+        g.addColorStop(1, "rgba(255,212,0,0)");
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      blob(220, 240, 360, .18);
+      blob(920, 240, 320, .10);
+      blob(240, 1600, 420, .10);
+
+      // Header chip
+      const pad = 72;
+      const headerH = 128;
+      ctx.save();
+      ctx.globalAlpha = 0.9;
+      drawRoundedRect(ctx, pad, 70, canvas.width - pad * 2, headerH, 28);
+      ctx.fillStyle = "rgba(10,10,10,.55)";
+      ctx.fill();
+      ctx.strokeStyle = "rgba(255,255,255,.10)";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.restore();
+
+      /*// Logo
+      const logoX = pad + 22;
+      const logoY = 70 + 22;
+      const logoS = 84;
+      const lg = ctx.createLinearGradient(logoX, logoY, logoX, logoY + logoS);
+      lg.addColorStop(0, "rgba(255,212,0,1)");
+      lg.addColorStop(1, "rgba(255,212,0,.55)");
+      ctx.fillStyle = lg;
+      ctx.strokeStyle = "rgba(255,255,255,.14)";
+      ctx.lineWidth = 2;
+      drawRoundedRect(ctx, logoX, logoY, logoS, logoS, 24);
+      ctx.fill();
+      ctx.stroke();
+
+      // IF letters
+      ctx.fillStyle = "#101010";
+      ctx.font = "900 38px ui-sans-serif, system-ui";
+      ctx.textBaseline = "middle";
+      ctx.fillText("IF", logoX + 23, logoY + logoS / 2 + 2);*/
+      // Logo (imagen real de la app)
+      const logoX = pad + 22;
+      const logoY = 70 + 22;
+      const logoS = 84;
+
+      function drawLogo(ctx) {
+        ctx.save();
+
+        // contenedor con borde redondeado (igual al estilo anterior)
+        ctx.beginPath();
+        drawRoundedRect(ctx, logoX, logoY, logoS, logoS, 24);
+        ctx.clip();
+
+        // dibujar imagen
+        ctx.drawImage(appLogoImg, logoX, logoY, logoS, logoS);
+
+        // borde
+        ctx.strokeStyle = "rgba(255,255,255,.14)";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.restore();
+      }
+
+
+      // Header text
+      ctx.fillStyle = "rgba(255,255,255,.95)";
+      ctx.font = "900 34px ui-sans-serif, system-ui";
+      ctx.textBaseline = "alphabetic";
+      ctx.fillText("Industria Fitness", logoX + logoS + 22, 70 + 54);
+
+      ctx.fillStyle = "rgba(255,255,255,.65)";
+      ctx.font = "700 22px ui-sans-serif, system-ui";
+      ctx.fillText("Gym Wrapped 2025", logoX + logoS + 22, 70 + 92);
+
+      // Right chip: ID
+      const chipW = 220;
+      drawRoundedRect(ctx, canvas.width - pad - chipW, 70 + 26, chipW, 76, 999);
+      ctx.fillStyle = "rgba(255,255,255,.04)";
+      ctx.fill();
+      ctx.strokeStyle = "rgba(255,255,255,.12)";
+      ctx.stroke();
+
+      ctx.fillStyle = "rgba(255,255,255,.68)";
+      ctx.font = "800 18px ui-sans-serif, system-ui";
+      ctx.fillText("ID", canvas.width - pad - chipW + 24, 70 + 58);
+      ctx.fillStyle = "#fff";
+      ctx.font = "950 24px ui-sans-serif, system-ui";
+      ctx.fillText(String(c.idcliente), canvas.width - pad - chipW + 24, 70 + 88);
+
+      // Big title
+      ctx.fillStyle = "#fff";
+      ctx.font = "950 86px ui-sans-serif, system-ui";
+      ctx.fillText(c.idcliente, pad, 320);
+
+      // Level highlight
+      ctx.fillStyle = "rgba(255,212,0,.95)";
+      ctx.font = "950 44px ui-sans-serif, system-ui";
+      ctx.fillText(lvl, pad, 390);
+
+      // Stat cards
+      const cardsY = 470;
+      const cardW = (canvas.width - pad * 2 - 26) / 2;
+      const cardH = 190;
+
+      function statCard(ix, title, value) {
+        const x = pad + (ix % 2) * (cardW + 26);
+        const y = cardsY + Math.floor(ix / 2) * (cardH + 22);
+
+        // Card bg
+        ctx.save();
+        drawRoundedRect(ctx, x, y, cardW, cardH, 28);
+        const cg = ctx.createLinearGradient(x, y, x, y + cardH);
+        cg.addColorStop(0, "rgba(255,255,255,.05)");
+        cg.addColorStop(1, "rgba(255,255,255,.02)");
+        ctx.fillStyle = cg;
+        ctx.fill();
+        ctx.strokeStyle = "rgba(255,255,255,.10)";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.restore();
+
+        // Title
+        ctx.fillStyle = "rgba(255,255,255,.60)";
+        ctx.font = "800 20px ui-sans-serif, system-ui";
+        ctx.fillText(title, x + 22, y + 56);
+
+        // Value
+        ctx.fillStyle = "#fff";
+        ctx.font = "950 52px ui-sans-serif, system-ui";
+        ctx.fillText(value, x + 22, y + 120);
+
+        // Accent line
+        ctx.strokeStyle = "rgba(255,212,0,.55)";
+        ctx.lineWidth = 6;
+        ctx.lineCap = "round";
+        ctx.beginPath();
+        ctx.moveTo(x + 22, y + cardH - 30);
+        ctx.lineTo(x + 160, y + cardH - 30);
+        ctx.stroke();
+      }
+
+      statCard(0, "Total de visitas", String(c.total_visitas));
+      statCard(1, "Mejor mes", String(c.mes_mejor_constancia));
+      statCard(2, "Racha de ausencia", `${c.mayor_racha_ausencia_dias} días`);
+      statCard(3, "Más constante que el", String(c.ranking.fuiste_mas_constante_que));
+
+      // Funny phrase panel
+      const panelY = 940;
+      const panelH = 350;
+      const panelW = canvas.width - pad * 2;
+
+      // Panel background
+      ctx.save();
+      drawRoundedRect(ctx, pad, panelY, panelW, panelH, 34);
+      const pg = ctx.createLinearGradient(pad, panelY, pad, panelY + panelH);
+      pg.addColorStop(0, "rgba(255,212,0,.18)");
+      pg.addColorStop(1, "rgba(255,255,255,.03)");
+      ctx.fillStyle = pg;
+      ctx.fill();
+      ctx.strokeStyle = "rgba(255,255,255,.10)";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.restore();
+
+      ctx.fillStyle = "rgba(255,255,255,.70)";
+      ctx.font = "900 22px ui-sans-serif, system-ui";
+      ctx.fillText("Frase del año", pad + 26, panelY + 60);
+
+      ctx.fillStyle = "#fff";
+      ctx.font = "950 40px ui-sans-serif, system-ui";
+      const lines = wrapText(ctx, `“${funny}”`, pad + 26, panelY + 120, panelW - 52, 54, 4);
+
+      // Footer
+      ctx.fillStyle = "rgba(255,255,255,.52)";
+      ctx.font = "800 20px ui-sans-serif, system-ui";
+      ctx.fillText("Industria Fitness · Gym Wrapped 2025 © Abelito — Design & development.", pad, canvas.height - 84);
+
+      // Yellow dot
+      ctx.fillStyle = "rgba(255,212,0,.95)";
+      ctx.beginPath();
+      ctx.arc(canvas.width - pad - 18, canvas.height - 92, 8, 0, Math.PI * 2);
+      ctx.fill();
+
+      /* // Export
+      const dataUrl = canvas.toDataURL("image/png");
+      const img = $("#imgPreview");
+      img.src = dataUrl;
+      $("#previewWrap").style.display = "block";
+
+      // Auto-download
+      const a = document.createElement("a");
+      a.href = dataUrl;
+      a.download = `IndustriaFitness_Wrapped_${c.idcliente}.png`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      return { dataUrl, width: canvas.width, height: canvas.height }; */
+      // Export (espera a que el logo cargue antes de descargar)
+      function exportCanvasWithLogo() {
+
+        const doExport = () => {
+          // Preview
+          canvas.toBlob((blob) => {
+            if (!blob) {
+              alert("No se pudo generar la imagen");
+              return;
+            }
+
+            const blobUrl = URL.createObjectURL(blob);
+
+            // Preview
+            const img = document.querySelector("#imgPreview");
+            img.src = blobUrl;
+            document.querySelector("#previewWrap").style.display = "block";
+
+            // Auto-download
+            const a = document.createElement("a");
+            a.href = blobUrl;
+            a.download = `IndustriaFitness_Wrapped_${c.idcliente}.png`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+
+            // limpiar memoria
+            setTimeout(() => URL.revokeObjectURL(blobUrl), 2000);
+          }, "image/png");
+        };
+
+        // Asegurar que el logo esté dibujado antes
+        if (appLogoImg.complete && appLogoImg.naturalWidth > 0) {
+          drawLogo(ctx);   // <- TU función de logo con drawImage
+          doExport();
+        } else {
+          appLogoImg.onload = () => {
+            drawLogo(ctx);
+            doExport();
+          };
+          appLogoImg.onerror = () => {
+            console.warn("Logo no cargó, exportando sin logo");
+            doExport();
+          };
+        }
+      }
+
+      // 🔥 LLAMADA FINAL (en lugar del bloque viejo)
+      exportCanvasWithLogo();
+
+    }
+
+    /***********************
+     * Navigation & actions
+     ***********************/
+    $("#btnAnalyze").addEventListener("click", () => {
+      const id = safeInt($("#clientId").value);
+      //const name = $("#clientName").value || "";
+
+      const err = $("#loginError");
+      err.style.display = "none";
+
+      if (!Number.isFinite(id)) {
+        err.textContent = "Pon un ID válido (número).";
+        err.style.display = "block";
+        return;
+      }
+
+      const client = findClientById(id);
+      if (!client) {
+        err.textContent = "No encontré ese ID. Revisa el número y prueba otra vez.";
+        err.style.display = "block";
+        return;
+      }
+
+      state.client = client;
+      //state.name = name.trim() || "Asere";
+      state.level = levelName(client.ranking?.nivel);
+      state.funny = makeFunnyPhrase(client.ranking?.nivel);
+      //state.funny = makeFunnyPhrase(client);
+
+      // Loading screen for 3 seconds
+      $("#pillId").textContent = String(client.idcliente);
+      showScreen("#screenLoading");
+
+      window.setTimeout(() => {
+        renderWrapped();
+        showScreen("#screenWrapped");
+      }, 3000);
+    });
+
+    // Allow Enter key to trigger analyze
+    ["#clientId"].forEach(sel => {
+      $(sel).addEventListener("keydown", (e) => {
+        if (e.key === "Enter") $("#btnAnalyze").click();
+      });
+    });
+
+    $("#btnGenerate").addEventListener("click", () => {
+      try { generateImage(); }
+      catch (e) {
+        console.error(e);
+        alert("Ocurrió un error generando la imagen. Revisa la consola.");
+      }
+    });
+
+    /***********************
+     * Simple JS Tests (no libraries)
+     ***********************/
+    /*function setBadge(id, ok, label) {
+      const el = $(id);
+      el.classList.remove("ok", "fail");
+      el.classList.add(ok ? "ok" : "fail");
+      el.textContent = label || (ok ? "OK" : "FAIL");
+    }
+
+    function runTests() {
+      // Test 1: Find client by ID
+      try {
+        const c = findClientById(33);
+        const ok = !!c && c.idcliente === 33 && typeof c.total_visitas === "number";
+        setBadge("#tFind", ok, ok ? "OK" : "FAIL");
+      } catch (e) {
+        console.error(e);
+        setBadge("#tFind", false, "FAIL");
+      }
+
+      // Test 2: Canvas 1080×1920
+      try {
+        const canvas = $("#shareCanvas");
+        const ok = canvas && canvas.width === 1080 && canvas.height === 1920;
+        setBadge("#tCanvas", ok, ok ? "OK" : "FAIL");
+      } catch (e) {
+        console.error(e);
+        setBadge("#tCanvas", false, "FAIL");
+      }
+    }
+
+    runTests();
+
+    // Small polish: Pre-fill an example
+    $("#clientId").value = "33";
+    $("#clientName").value = "";*/
+  </script>
+</body>
+
+</html>
