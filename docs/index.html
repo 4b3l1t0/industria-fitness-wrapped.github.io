@@ -573,7 +573,7 @@
     <section class="screen active" id="screenLogin" aria-label="Login">
       <div class="content">
 
-        <div class="topbar" style="margin-top:5px">
+        <div class="topbar" style="margin-top:0px">
           <!-- <div class="topbar"> -->
           <div class="brand">
             <div class="logo" aria-hidden="true">
@@ -647,7 +647,7 @@
 
     <!-- Screen 2: Loading -->
     <section class="screen" id="screenLoading" aria-label="Loading">
-      <div class="topbar" style="margin-top:5px">
+      <div class="topbar" style="margin-top:0px">
         <div class="brand">
           <div class="logo" aria-hidden="true">
             <img src="./IMG-20250126-WA0079.jpg">
@@ -675,7 +675,7 @@
 
     <!-- Screen 3: Wrapped (slides) -->
     <section class="screen" id="screenWrapped" aria-label="Wrapped">
-      <div class="topbar" style="margin-top:5px">
+      <div class="topbar" style="margin-top:0px">
         <div class="brand">
           <div class="logo" aria-hidden="true">
             <img src="./IMG-20250126-WA0079.jpg">
@@ -703,7 +703,7 @@
 
     <!-- Screen 4: Final image generation -->
     <section class="screen" id="screenImage" aria-label="Generar imagen">
-      <div class="topbar" style="margin-top:5px">
+      <div class="topbar" style="margin-top:0px">
         <div class="brand">
           <div class="logo" aria-hidden="true">
             <img src="./IMG-20250126-WA0079.jpg">
@@ -795,67 +795,147 @@
     // ===============================
     const FRASES_POR_NIVEL = {
       5: [
-        "Empezaste suave, pero lo importante es que arrancaste 💪",
-        "Todo campeón fue novato alguna vez 😄",
-        "Poco a poco se llena el saco",
-        "El cuerpo todavía está preguntando qué está pasando 😂",
-        "Tranquilo, esto es solo el calentamiento",
-        "Lo bueno no es cuántas veces fuiste, sino que fuiste",
-        "Aquí no se juzga, se progresa",
-        "El espejo ya te está conociendo",
-        "La pesa aún no te extraña… pero espérate",
-        "Nivel inicial desbloqueado 🔓"
+        "Viniste… y eso ya es noticia nacional 🗞️",
+        "El gym todavía cree que eres visita",
+        "El cuerpo está en shock: ¿esto es legal?",
+        "Las mancuernas te miran como diciendo: ¿y este?",
+        "Hiciste más selfies que repeticiones 📸",
+        "Calentaste tanto que casi te vas",
+        "El sudor salió, pero con timidez",
+        "Todavía preguntas: ¿esto cómo se usa?",
+        "El espejo no te reconoce… aún",
+        "Nivel: vine porque pagué",
+        "El cuerpo piensa que es una broma",
+        "Duraste más buscando música que entrenando 🎧",
+        "Te fuiste orgulloso… sin saber por qué",
+        "Aquí empezó la novela",
+        "Principiante, pero con fe",
+        "El gym aún no te guarda luto si faltas",
+        "Viniste más que el mes pasado, récord personal 🏆",
+        "Saliste diciendo: mañana descanso",
+        "El cuerpo mañana te va a reclamar",
+        "Fuiste poco, pero fuiste",
+        "Modo: sobreviviendo",
+        "El gym aún no aprendió tu nombre",
+        "Nivel tutorial activado",
+        "Todavía crees que esto no duele",
+        "Personaje en creación"
       ],
 
       4: [
-        "Ya esto no es relajo, se te ve la constancia 👀",
-        "El gym ya sabe quién tú eres",
-        "Ni principiante ni animal, pero vas bien",
-        "El cuerpo empieza a responder",
-        "Aquí ya hay compromiso",
-        "Te extrañan cuando no vas",
-        "El espejo empieza a respetarte",
-        "Las agujetas son parte de la familia",
-        "Estás en el punto peligroso: si paras, se pierde",
-        "Sigue así que la cosa se pone buena"
+        "Ya el gym no se sorprende al verte",
+        "El cuerpo dice: ah, otra vez tú",
+        "Empiezas a sudar sin permiso",
+        "Las agujetas ya te saludan por tu nombre",
+        "Si faltas un día, te sientes culpable 😬",
+        "Aquí es donde muchos abandonan… tú sigues",
+        "El espejo ya no se ríe",
+        "Empiezas a creerte el cuento",
+        "El calentamiento ya no es media hora",
+        "Nivel: ya pagó la mensualidad con orgullo",
+        "Las pesas ya no te asustan",
+        "El cuerpo empieza a cooperar",
+        "Empiezas a tener horarios de gym",
+        "El sudor ya es serio",
+        "Aquí hay constancia sospechosa",
+        "La ropa empieza a quedarte raro",
+        "El gym ya sospecha que vas en serio",
+        "Ya no vienes solo por cumplir",
+        "Nivel medio, pero con hambre",
+        "Empiezas a mirar rutinas en TikTok",
+        "El espejo te da un like",
+        "Aquí el cuerpo ya no protesta tanto",
+        "Las excusas van muriendo",
+        "Modo: constante pero cansado",
+        "Se siente el progreso… un poco"
       ],
+
       3: [
-        "Esto ya es disciplina, no motivación 🔥",
-        "El gym es tu segunda casa",
-        "Si no vas un día, algo no cuadra",
-        "El cuerpo ya sabe la rutina",
-        "Aquí hay sacrificio real",
-        "No hace falta hablar, los resultados hablan",
-        "Constancia nivel serio",
-        "Ya te miran raro los nuevos",
-        "El espejo asiente con la cabeza",
-        "Respeto ganado a pulso"
+        "Aquí ya no hay motivación, hay obligación 😤",
+        "El gym es parte de tu personalidad",
+        "Si no entrenas, el día se siente raro",
+        "El cuerpo ya sabe lo que toca",
+        "Las pesas ya no preguntan",
+        "Empiezas a juzgar a los nuevos (mentalmente)",
+        "El espejo ya no miente",
+        "Aquí ya se suda con propósito",
+        "La disciplina se mudó contigo",
+        "Nivel: serio pero humilde",
+        "El gym ya te guarda espacio",
+        "El cuerpo pide hierro",
+        "Empiezas a sentirte culpable si descansas",
+        "La ropa buena la usas para entrenar",
+        "El sudor ya es abundante",
+        "Aquí hay constancia real",
+        "Las miradas empiezan",
+        "El cuerpo responde… a veces",
+        "Modo: enfocado pero cansado",
+        "Ya tienes ejercicios favoritos",
+        "El espejo asiente con respeto",
+        "Aquí se entrena aunque no haya ganas",
+        "Nivel disciplina desbloqueado",
+        "Empiezas a dar consejos sin que te los pidan",
+        "Modo: no pain, no story"
       ],
+
       2: [
-        "Esto ya es otra liga 🦍",
-        "Las pesas te saludan primero a ti",
-        "Si faltas, preguntan por ti",
-        "Aquí no hay excusas",
-        "El sudor ya es parte del outfit",
+        "Aquí ya no hay excusas, hay rutina 🦍",
+        "Las pesas te ven y suspiran",
+        "Si faltas, preguntan si estás bien",
+        "El sudor es parte del outfit oficial",
         "El cuerpo ya no negocia descanso",
-        "Modo animal activado",
-        "Esto no es gym, es templo",
-        "La disciplina te tiene miedo",
-        "Nivel leyenda en progreso"
+        "Modo bestia activado",
+        "Aquí se viene a sufrir con estilo",
+        "El gym es templo, tú eres fiel",
+        "La disciplina te pide perdón",
+        "Nivel: respeto ganado",
+        "El cuerpo te despierta para entrenar",
+        "Las máquinas ya te reconocen",
+        "Aquí se carga sin hablar",
+        "Entrenas aunque no quieras",
+        "La constancia ya es automática",
+        "El espejo ya no critica",
+        "Modo animal permanente",
+        "Aquí se entrena aunque duela",
+        "El cuerpo responde solo",
+        "Ya no preguntas, ejecutas",
+        "El gym es parte de tu agenda",
+        "Nivel alto desbloqueado",
+        "Empiezas a intimidar sin querer",
+        "El sudor es abundante y honesto",
+        "Constancia nivel serio serio"
       ],
+
       1: [
-        "Esto no es constancia, es devoción 🏆",
-        "El gym abre por ti",
-        "Las máquinas te respetan",
-        "Tu ausencia se siente",
-        "Aquí se entrena aunque llueva",
-        "El espejo ya no opina, aplaude",
-        "Esto ya es cultura física",
-        "Leyenda urbana del gimnasio",
-        "No entrenas, impartes clases",
-        "Nivel final desbloqueado 👑"
+        "Esto ya no es gym, es religión 🛐",
+        "El gym abre cuando tú llegas",
+        "Las máquinas se ajustan solas",
+        "Si no vienes, algo anda mal",
+        "Entrenas aunque llueva, truene o no haya luz",
+        "El espejo ya no opina, se para y aplaude 👏",
+        "Leyenda viva del gimnasio",
+        "No entrenas, inspiras",
+        "Aquí se entrena por reflejo",
+        "Nivel final desbloqueado 👑",
+        "El gym te debe dinero",
+        "Las pesas saben tu nombre completo",
+        "El sudor es parte de tu ADN",
+        "Modo leyenda permanente",
+        "Aquí no hay descanso, hay adaptación",
+        "El cuerpo ya no discute",
+        "No fallas, ejecutas",
+        "Nivel: ejemplo a seguir",
+        "El espejo te respeta",
+        "La constancia eres tú",
+        "Entrenas hasta en días malos",
+        "Referencia obligatoria del gym",
+        "Final boss desbloqueado",
+        "El gym habla de ti cuando no estás",
+        "Esto ya es abuso de disciplina"
       ]
     };
+
+
 
     // ===============================
     // OBTENER FRASE RANDOM
@@ -992,7 +1072,7 @@
       }));
 
       slides.push(slideTemplate({
-        kicker: "Frase del año",
+        kicker: "Frase",
         big: `<span>“</span>${state.funny}<span>”</span>`,
         sub: "Si te dolió… es porque es verdad. 😄",
         footer: "Desliza para seguir"
@@ -1286,7 +1366,7 @@
 
       ctx.fillStyle = "rgba(255,255,255,.70)";
       ctx.font = "900 22px ui-sans-serif, system-ui";
-      ctx.fillText("Frase del año", pad + 26, panelY + 60);
+      ctx.fillText("Frase", pad + 26, panelY + 60);
 
       ctx.fillStyle = "#fff";
       ctx.font = "950 40px ui-sans-serif, system-ui";
